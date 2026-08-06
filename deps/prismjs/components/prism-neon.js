@@ -38,3 +38,4 @@ Prism.languages.neon = {
 	},
 	'punctuation': /[,:=[\]{}()-]/,
 };
+

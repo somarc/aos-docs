@@ -28,3 +28,4 @@ Prism.languages.nsis = {
 		lookbehind: true
 	}
 };
+

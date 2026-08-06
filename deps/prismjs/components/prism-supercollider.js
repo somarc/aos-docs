@@ -34,3 +34,4 @@ Prism.languages.supercollider = {
 };
 
 Prism.languages.sclang = Prism.languages.supercollider;
+

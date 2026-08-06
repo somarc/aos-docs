@@ -53,3 +53,4 @@ Prism.languages.powerquery = {
 
 Prism.languages.pq = Prism.languages['powerquery'];
 Prism.languages.mscript = Prism.languages['powerquery'];
+

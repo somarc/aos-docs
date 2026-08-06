@@ -4,3 +4,4 @@ import { loadBlock } from './nx.js';
   const header = document.querySelector('header');
   if (header) await loadBlock(header);
 }());
+

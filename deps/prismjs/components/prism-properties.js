@@ -11,3 +11,4 @@ Prism.languages.properties = {
 	},
 	'punctuation': /[=:]/
 };
+

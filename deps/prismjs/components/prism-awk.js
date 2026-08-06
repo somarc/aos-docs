@@ -30,3 +30,4 @@ Prism.languages.awk = {
 };
 
 Prism.languages.gawk = Prism.languages.awk;
+

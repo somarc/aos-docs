@@ -284,3 +284,4 @@
 	phraseTableInside['mark'] = nestedPatterns['mark'];
 
 }(Prism));
+

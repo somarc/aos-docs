@@ -27,3 +27,4 @@ Prism.languages.asm6502 = {
 	},
 	'punctuation': /[(),:]/
 };
+

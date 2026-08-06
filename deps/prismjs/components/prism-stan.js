@@ -63,3 +63,4 @@
 	Prism.languages.stan.constraint.inside.expression.inside = Prism.languages.stan;
 
 }(Prism));
+

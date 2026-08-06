@@ -18,3 +18,4 @@ Prism.languages.brainfuck = {
 	'operator': /[.,]/,
 	'comment': /\S+/
 };
+

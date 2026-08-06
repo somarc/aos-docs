@@ -85,3 +85,4 @@
 	javaDocLike.addSupport(['java', 'javascript', 'php'], javaDocLike);
 
 }(Prism));
+

@@ -48,3 +48,4 @@ Prism.languages['avro-idl'] = {
 };
 
 Prism.languages.avdl = Prism.languages['avro-idl'];
+

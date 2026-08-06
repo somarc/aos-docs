@@ -12,3 +12,4 @@ Prism.languages.insertBefore('php', 'variable', {
 		}
 	}
 });
+

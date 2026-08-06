@@ -69,3 +69,4 @@ Prism.languages.pascal.asm.inside = Prism.languages.extend('pascal', {
 });
 
 Prism.languages.objectpascal = Prism.languages.pascal;
+

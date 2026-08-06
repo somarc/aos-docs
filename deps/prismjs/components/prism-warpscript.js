@@ -19,3 +19,4 @@ Prism.languages.warpscript = {
 	// https://www.warp10.io/tags/operators
 	'operator': /==|&&?|\|\|?|\*\*?|>>>?|<<|[<>!~]=?|[-/%^]|\+!?|\b(?:AND|NOT|OR)\b/
 };
+

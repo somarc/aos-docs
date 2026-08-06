@@ -186,3 +186,4 @@
 	Prism.languages.insertBefore('pug', 'filter', all_filters);
 
 }(Prism));
+

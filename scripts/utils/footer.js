@@ -11,3 +11,4 @@ export default async function loadFooter() {
   footer.className = meta;
   loadBlock(footer);
 }
+

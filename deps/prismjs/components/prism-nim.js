@@ -42,3 +42,4 @@ Prism.languages.nim = {
 	},
 	'punctuation': /[({\[]\.|\.[)}\]]|[`(){}\[\],:]/
 };
+

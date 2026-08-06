@@ -18,3 +18,4 @@ Prism.languages.qore = Prism.languages.extend('clike', {
 	},
 	'variable': /\$(?!\d)\w+\b/
 });
+

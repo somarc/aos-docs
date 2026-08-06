@@ -80,3 +80,4 @@ Prism.languages.insertBefore('wiki', 'tag', {
 		}
 	}
 });
+

@@ -64,3 +64,4 @@ Prism.hooks.add('before-tokenize', function (env) {
 Prism.hooks.add('after-tokenize', function (env) {
 	Prism.languages['markup-templating'].tokenizePlaceholders(env, 'liquid');
 });
+

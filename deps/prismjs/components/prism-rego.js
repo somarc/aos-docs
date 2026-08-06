@@ -28,3 +28,4 @@ Prism.languages.rego = {
 	'operator': /[-+*/%|&]|[<>:=]=?|!=|\b_\b/,
 	'punctuation': /[,;.\[\]{}()]/
 };
+

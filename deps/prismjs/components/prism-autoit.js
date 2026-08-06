@@ -32,3 +32,4 @@ Prism.languages.autoit = {
 	'operator': /<[=>]?|[-+*\/=&>]=?|[?^]|\b(?:And|Not|Or)\b/i,
 	'punctuation': /[\[\]().,:]/
 };
+

@@ -59,3 +59,4 @@ Prism.languages.inform7['string'].inside['substitution'].inside.rest.text = {
 	pattern: /\S(?:\s*\S)*/,
 	alias: 'comment'
 };
+

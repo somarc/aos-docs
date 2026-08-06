@@ -53,3 +53,4 @@ async function decorate(el) {
 export default async function init(el) {
   observe(el, decorate);
 }
+

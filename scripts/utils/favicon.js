@@ -12,3 +12,4 @@ import { getConfig, getMetadata } from '../nx.js';
   favicon.insertAdjacentHTML('afterend', tags);
   favicon.href = `${favBase}.ico`;
 }());
+

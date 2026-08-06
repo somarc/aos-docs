@@ -96,3 +96,4 @@
 	Prism.languages.dockerfile = Prism.languages.docker;
 
 }(Prism));
+

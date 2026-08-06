@@ -25,3 +25,4 @@ Prism.languages.json = {
 };
 
 Prism.languages.webmanifest = Prism.languages.json;
+

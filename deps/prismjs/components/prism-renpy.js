@@ -27,3 +27,4 @@ Prism.languages.renpy = {
 };
 
 Prism.languages.rpy = Prism.languages.renpy;
+

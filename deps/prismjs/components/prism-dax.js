@@ -25,3 +25,4 @@ Prism.languages.dax = {
 	'operator': /:=|[-+*\/=^]|&&?|\|\||<(?:=>?|<|>)?|>[>=]?|\b(?:IN|NOT)\b/i,
 	'punctuation': /[;\[\](){}`,.]/
 };
+

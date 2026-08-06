@@ -27,3 +27,4 @@ Prism.languages.cmake = {
 	'function': /\b[a-z_]\w*(?=\s*\()\b/i,
 	'punctuation': /[()>}]|\$[<{]/
 };
+

@@ -8,3 +8,4 @@ Prism.languages.arff = {
 	'number': /\b\d+(?:\.\d+)?\b/,
 	'punctuation': /[{},]/
 };
+

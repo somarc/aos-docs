@@ -104,3 +104,4 @@
 	Prism.languages.kum = Prism.languages.kumir;
 
 }(Prism));
+

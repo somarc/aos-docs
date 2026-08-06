@@ -40,3 +40,4 @@ Prism.languages.unrealscript = {
 };
 
 Prism.languages.uc = Prism.languages.uscript = Prism.languages.unrealscript;
+

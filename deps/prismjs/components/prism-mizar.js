@@ -10,3 +10,4 @@ Prism.languages.mizar = {
 	'operator': /\.\.\.|->|&|\.?=/,
 	'punctuation': /\(#|#\)|[,:;\[\](){}]/
 };
+

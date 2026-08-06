@@ -22,3 +22,4 @@ Prism.languages.n1ql = {
 	'operator': /[-+*\/%]|!=|==?|\|\||<[>=]?|>=?|\b(?:AND|ANY|ARRAY|BETWEEN|CASE|ELSE|END|EVERY|EXISTS|FIRST|IN|LIKE|NOT|OR|THEN|VALUED|WHEN|WITHIN)\b/i,
 	'punctuation': /[;[\](),.{}:]/
 };
+

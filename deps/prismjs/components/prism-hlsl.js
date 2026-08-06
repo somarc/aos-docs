@@ -18,3 +18,4 @@ Prism.languages.hlsl = Prism.languages.extend('c', {
 	'number': /(?:(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:[eE][+-]?\d+)?|\b0x[\da-fA-F]+)[fFhHlLuU]?\b/,
 	'boolean': /\b(?:false|true)\b/
 });
+

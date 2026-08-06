@@ -39,3 +39,4 @@ Prism.languages.insertBefore('jolie', 'keyword', {
 		pattern: /\b(?:Aggregates|[Ii]nterfaces|Java|Javascript|Jolie|[Ll]ocation|OneWay|[Pp]rotocol|Redirects|RequestResponse)\b(?=[ \t]*:)/
 	}
 });
+

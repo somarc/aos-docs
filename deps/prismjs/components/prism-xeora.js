@@ -112,3 +112,4 @@
 	Prism.languages.xeoracube = Prism.languages.xeora;
 
 }(Prism));
+

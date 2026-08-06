@@ -26,3 +26,4 @@ Prism.languages.insertBefore('go', 'string', {
 });
 
 delete Prism.languages.go['class-name'];
+

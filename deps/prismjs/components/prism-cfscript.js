@@ -42,3 +42,4 @@ Prism.languages.insertBefore('cfscript', 'keyword', {
 
 delete Prism.languages.cfscript['class-name'];
 Prism.languages.cfc = Prism.languages['cfscript'];
+

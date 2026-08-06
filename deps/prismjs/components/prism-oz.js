@@ -26,3 +26,4 @@ Prism.languages.oz = {
 	'operator': /:(?:=|::?)|<[-:=]?|=(?:=|<?:?)|>=?:?|\\=:?|!!?|[|#+\-*\/,~^@]|\b(?:andthen|div|mod|orelse)\b/,
 	'punctuation': /[\[\](){}.:;?]/
 };
+

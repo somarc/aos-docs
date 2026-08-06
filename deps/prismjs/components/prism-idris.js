@@ -17,3 +17,4 @@ Prism.languages.insertBefore('idris', 'keyword', {
 });
 
 Prism.languages.idr = Prism.languages.idris;
+

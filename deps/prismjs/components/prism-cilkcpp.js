@@ -7,3 +7,4 @@ Prism.languages.cilkcpp = Prism.languages.insertBefore('cpp', 'function', {
 
 Prism.languages['cilk-cpp'] = Prism.languages['cilkcpp'];
 Prism.languages['cilk'] = Prism.languages['cilkcpp'];
+

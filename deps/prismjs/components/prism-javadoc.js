@@ -80,3 +80,4 @@
 
 	Prism.languages.javadoclike.addSupport('java', Prism.languages.javadoc);
 }(Prism));
+

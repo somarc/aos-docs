@@ -68,3 +68,4 @@ delete Prism.languages.purebasic['class-name'];
 delete Prism.languages.purebasic['boolean'];
 
 Prism.languages.pbfasm = Prism.languages['purebasic'];
+

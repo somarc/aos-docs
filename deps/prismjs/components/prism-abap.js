@@ -46,3 +46,4 @@ Prism.languages.abap = {
 	}],
 	'punctuation': /[,.:()]/
 };
+

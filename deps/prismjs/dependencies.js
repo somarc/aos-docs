@@ -450,3 +450,4 @@ var getLoader = (function () {
 if (typeof module !== 'undefined') {
 	module.exports = getLoader;
 }
+

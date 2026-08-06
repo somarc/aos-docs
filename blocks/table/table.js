@@ -6,3 +6,4 @@ export default function init(el) {
     row.classList.add('table-content-row');
   }
 }
+

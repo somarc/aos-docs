@@ -23,3 +23,4 @@ Prism.languages.al = {
 	'operator': /\.\.|:[=:]|[-+*/]=?|<>|[<>]=?|=|\b(?:and|div|mod|not|or|xor)\b/i,
 	'punctuation': /[()\[\]{}:.;,]/
 };
+

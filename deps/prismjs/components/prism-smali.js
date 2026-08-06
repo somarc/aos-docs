@@ -85,3 +85,4 @@ Prism.languages.smali = {
 	'operator': /->|\.\.|[\[=]/,
 	'punctuation': /[{}(),;:]/
 };
+

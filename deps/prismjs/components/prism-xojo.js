@@ -19,3 +19,4 @@ Prism.languages.xojo = {
 	'operator': /<[=>]?|>=?|[+\-*\/\\^=]|\b(?:AddressOf|And|Ctype|IsA?|Mod|New|Not|Or|WeakAddressOf|Xor)\b/i,
 	'punctuation': /[.,;:()]/
 };
+

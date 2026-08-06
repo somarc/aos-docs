@@ -147,3 +147,4 @@
 	Prism.languages.insertBefore('haml', 'filter', all_filters);
 
 }(Prism));
+

@@ -22,3 +22,4 @@ Prism.languages['go-mod'] = Prism.languages['go-module'] = {
 	'operator': /=>/,
 	'punctuation': /[()[\],]/
 };
+

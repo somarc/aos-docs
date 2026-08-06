@@ -49,3 +49,4 @@ Prism.languages.keepalived = {
 
 	'punctuation': /[\{\}]/
 };
+

@@ -53,3 +53,4 @@ Prism.languages.lolcode = {
 	},
 	'punctuation': /\.{3}|…|,|!/
 };
+

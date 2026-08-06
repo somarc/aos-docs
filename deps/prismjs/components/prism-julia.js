@@ -33,3 +33,4 @@ Prism.languages.julia = {
 	// https://docs.julialang.org/en/v1/base/numbers/#Base.im
 	'constant': /\b(?:(?:Inf|NaN)(?:16|32|64)?|im|pi)\b|[πℯ]/
 };
+

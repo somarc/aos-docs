@@ -197,3 +197,4 @@
 	Prism.languages.razor = Prism.languages.cshtml;
 
 }(Prism));
+

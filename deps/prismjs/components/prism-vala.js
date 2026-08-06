@@ -82,3 +82,4 @@ Prism.languages.insertBefore('vala', 'keyword', {
 		}
 	}
 });
+

@@ -33,3 +33,4 @@ export default function createPicture({ src, alt = '', eager = false, breakpoint
 
   return picture;
 }
+

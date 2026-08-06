@@ -26,3 +26,4 @@ Prism.languages.gedcom = {
 		alias: 'variable'
 	}
 };
+

@@ -38,3 +38,4 @@
 	insertDocComment('vbnet', tickDocComment);
 
 }(Prism));
+

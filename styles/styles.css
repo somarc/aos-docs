@@ -1,6 +1,6 @@
 @font-face {
   font-family: adobe-clean;
-  src: url("/styles/fonts/adobe-clean-400.woff2") format("woff2");
+  src: url("/styles/fonts/aos-adobe-clean-400.woff2") format("woff2");
   font-display: optional;
   font-style: normal;
   font-weight: 400;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: adobe-clean;
-  src: url("/styles/fonts/adobe-clean-400-italic.woff2") format("woff2");
+  src: url("/styles/fonts/aos-adobe-clean-400-italic.woff2") format("woff2");
   font-display: optional;
   font-style: italic;
   font-weight: 400;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: adobe-clean;
-  src: url("/styles/fonts/adobe-clean-700.woff2") format("woff2");
+  src: url("/styles/fonts/aos-adobe-clean-700.woff2") format("woff2");
   font-display: optional;
   font-style: normal;
   font-weight: 700;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: adobe-clean;
-  src: url("/styles/fonts/adobe-clean-900.woff2") format("woff2");
+  src: url("/styles/fonts/aos-adobe-clean-900.woff2") format("woff2");
   font-display: optional;
   font-style: normal;
   font-weight: 900;
@@ -609,3 +609,4 @@ body.docs-template .doc-last-modified {
   font-style: italic;
   color: light-dark(var(--s2-gray-600), var(--s2-gray-500));
 }
+

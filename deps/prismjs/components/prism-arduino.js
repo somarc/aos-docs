@@ -5,3 +5,4 @@ Prism.languages.arduino = Prism.languages.extend('cpp', {
 });
 
 Prism.languages.ino = Prism.languages.arduino;
+

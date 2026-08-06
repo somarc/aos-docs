@@ -18,3 +18,4 @@ Prism.languages.lua = {
 	],
 	'punctuation': /[\[\](){},;]|\.+|:+/
 };
+

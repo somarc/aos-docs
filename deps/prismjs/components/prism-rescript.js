@@ -58,3 +58,4 @@ Prism.languages.insertBefore('rescript', 'string', {
 });
 
 Prism.languages.res = Prism.languages.rescript;
+

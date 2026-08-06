@@ -35,3 +35,4 @@ Prism.languages.nix = {
 };
 
 Prism.languages.nix.string.inside.interpolation.inside = Prism.languages.nix;
+

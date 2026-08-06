@@ -64,3 +64,4 @@ export default function init(block) {
     if (!art.querySelector('img')) art.classList.add('hero-art-placeholder');
   }
 }
+

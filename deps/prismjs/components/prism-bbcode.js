@@ -27,3 +27,4 @@ Prism.languages.bbcode = {
 };
 
 Prism.languages.shortcode = Prism.languages.bbcode;
+

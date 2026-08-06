@@ -94,3 +94,4 @@
 
 	Prism.languages.coffee = Prism.languages.coffeescript;
 }(Prism));
+

@@ -64,3 +64,4 @@ Prism.languages.haskell = {
 };
 
 Prism.languages.hs = Prism.languages.haskell;
+

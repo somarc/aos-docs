@@ -37,3 +37,4 @@ Prism.languages.insertBefore('bison', 'comment', {
 		}
 	}
 });
+

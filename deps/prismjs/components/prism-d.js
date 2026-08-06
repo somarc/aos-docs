@@ -82,3 +82,4 @@ Prism.languages.insertBefore('d', 'function', {
 		alias: 'variable'
 	}
 });
+

@@ -99,3 +99,4 @@
 	Prism.languages['webidl'] = Prism.languages['web-idl'];
 
 }(Prism));
+
