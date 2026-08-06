@@ -73,6 +73,6 @@ export async function loadPage() {
 
   await loadArea();
   await loadNav('pagenav');
-};
+}
 
 await loadPage();

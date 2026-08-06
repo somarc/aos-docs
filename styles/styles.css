@@ -1,33 +1,33 @@
 @font-face {
-  font-family: avenir-next-lt-pro;
-  src: url("/styles/fonts/avenir-next-400.woff2") format("woff2");
+  font-family: adobe-clean;
+  src: url("/styles/fonts/adobe-clean-400.woff2") format("woff2");
   font-display: optional;
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: avenir-next-lt-pro;
-  src: url("/styles/fonts/avenir-next-400-italic.woff2") format("woff2");
+  font-family: adobe-clean;
+  src: url("/styles/fonts/adobe-clean-400-italic.woff2") format("woff2");
   font-display: optional;
   font-style: italic;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: avenir-next-lt-pro;
-  src: url("/styles/fonts/avenir-next-700.woff2") format("woff2");
+  font-family: adobe-clean;
+  src: url("/styles/fonts/adobe-clean-700.woff2") format("woff2");
   font-display: optional;
   font-style: normal;
   font-weight: 700;
 }
 
 @font-face {
-  font-family: avenir-next-lt-pro;
-  src: url("/styles/fonts/avenir-next-700-italic.woff2") format("woff2");
+  font-family: adobe-clean;
+  src: url("/styles/fonts/adobe-clean-900.woff2") format("woff2");
   font-display: optional;
-  font-style: italic;
-  font-weight: 700;
+  font-style: normal;
+  font-weight: 900;
 }
 
 :root {
@@ -47,10 +47,10 @@
 
   --light-color: #fff;
   --light-link: #e6e6e6;
-  --light-main-link: #ea998f;
+  --light-main-link: #0367e0; /* hyperlink: Adobe blue, same in light + dark */
   --dark-color: #0e0e0e;
   --dark-link: #3f3f3f;
-  --dark-main-link: #d73220;
+  --dark-main-link: #0367e0; /* hyperlink: Adobe blue, same in light + dark */
 
   /* Spectrum 2 Colors */
   --s2-cyan-800: #0086b4;
@@ -89,7 +89,7 @@
   --s2-yellow-600: #d29500;
 
   /* fonts */
-  --font-family: avenir-next-lt-pro, "Trebuchet MS", sans-serif;
+  --font-family: adobe-clean, "adobe-clean", "Trebuchet MS", "Source Sans Pro", -apple-system, system-ui, sans-serif;
 
   /* headings */
   --heading-font-size-xxl: 32.44px;
@@ -121,6 +121,22 @@ body {
   font-family: var(--font-family);
   font-size: var(--body-font-size-m);
   line-height: var(--body-line-height);
+
+  /* Shared tokens for the home-page blocks (hero, cards, link-list, flow).
+     Defined here so all blocks theme consistently in light and dark.
+     Accent is Adobe Spectrum blue 500 (rgb 3 103 224); a lighter tint is used
+     for text/icons on dark surfaces, and a solid blue for buttons. */
+  --doc-accent: light-dark(rgb(3 103 224), rgb(94 156 255));
+  --doc-accent-strong: rgb(3 103 224);
+  --doc-accent-soft: light-dark(rgb(3 103 224 / 12%), rgb(94 156 255 / 18%));
+  --doc-surface: light-dark(var(--s2-gray-50), var(--s2-gray-800));
+  --doc-surface-2: light-dark(var(--s2-gray-75), color-mix(in srgb, var(--s2-gray-800) 55%, transparent));
+  --doc-border: light-dark(var(--s2-gray-300), var(--s2-gray-700));
+  --doc-border-soft: light-dark(var(--s2-gray-200), var(--s2-gray-800));
+  --doc-text: light-dark(var(--s2-gray-800), var(--s2-gray-100));
+  --doc-dim: light-dark(var(--s2-gray-700), var(--s2-gray-300));
+  --doc-mute: light-dark(var(--s2-gray-500), var(--s2-gray-500));
+  --doc-radius: 14px;
 
   a {
     text-decoration: none;
@@ -259,10 +275,6 @@ img {
   display: none;
 }
 
-@media (width >= 600px) {
-
-}
-
 @media (width >= 900px) {
   body {
     display: grid;
@@ -272,7 +284,6 @@ img {
       "sitenav footer" auto / 300px minmax(0, 1fr);
     justify-content: start;
     min-height: 100vh;
-      
 
     header {
       grid-area: header;
@@ -321,4 +332,280 @@ img {
 main > div,
 div[data-status] {
   display: none;
+}
+
+/* ===========================================================================
+   API reference (docs template)
+   Pages are generated in helix-commerce-api and synced to /api/*.html; this
+   styles their generated markup (method badges, endpoint headers, parameter
+   tables) for a three-column API reference look.
+   ========================================================================= */
+
+/* HTTP method badge — used in the sidenav and in endpoint headers. */
+.http-method {
+  display: inline-block;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: #fff;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.http-get { background: var(--s2-blue-900); }
+.http-post { background: var(--s2-green-900); }
+.http-put { background: var(--s2-orange-700); }
+.http-patch { background: var(--s2-orange-600); }
+.http-delete { background: var(--s2-red-900); }
+.http-options { background: var(--s2-gray-600); }
+.http-head { background: var(--s2-gray-600); }
+
+/* ---------------------------------------------------------------------------
+   3-column layout. Each generated page is a single operation: the sidenav
+   (300px) is column 1; `main` splits into a prose column + a code rail. The
+   rail lives in main (a second .section whose content carries `.code-rail`),
+   not the generic `pagenav` column, so we suppress pagenav for this template.
+   --------------------------------------------------------------------------- */
+
+@media (width >= 1200px) {
+  body.docs-template:has(.code-rail) {
+    grid-template:
+      "sitenav header" auto
+      "sitenav main" 1fr
+      "sitenav footer" auto / 300px minmax(0, 1fr);
+  }
+
+  body.docs-template:has(.code-rail) .pagenav {
+    display: none;
+  }
+
+  /* Prose column + sticky code rail, side by side. */
+  body.docs-template main:has(.code-rail) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 460px;
+    column-gap: 56px;
+    align-items: start;
+    max-width: none;
+    margin: 0 56px;
+  }
+
+  body.docs-template .section:has(.code-rail) {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+body.docs-template main {
+  max-width: 920px;
+}
+
+@media (width >= 1200px) {
+  body.docs-template:not(:has(.code-rail)) main {
+    max-width: none;
+  }
+}
+
+/* The eyebrow above the title (the API/tag name). */
+body.docs-template .api-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: light-dark(var(--s2-blue-900), var(--s2-blue-200));
+}
+
+body.docs-template:has(.code-rail) h1 {
+  margin: 0 0 18px;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+body.docs-template:not(:has(.code-rail)) h1 {
+  font-size: clamp(40px, 5vw, 48px);
+  line-height: 1.1;
+}
+
+body.docs-template:not(:has(.code-rail)) h2 {
+  font-size: clamp(30px, 3vw, 36px);
+  line-height: 1.15;
+}
+
+body.docs-template:not(:has(.code-rail)) h3 {
+  font-size: clamp(24px, 2.2vw, 28px);
+  line-height: 1.2;
+}
+
+/* Endpoint line: method badge + path. */
+body.docs-template .endpoint {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+body.docs-template .endpoint .http-method {
+  font-size: 12px;
+  padding: 4px 9px;
+}
+
+body.docs-template .http-path {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: light-dark(var(--s2-gray-100), var(--s2-gray-800));
+  word-break: break-all;
+}
+
+/* Section labels: Path parameters / Request body / Response. */
+body.docs-template:has(.code-rail) h2 {
+  margin-top: 36px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid light-dark(var(--s2-gray-200), var(--s2-gray-800));
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: light-dark(var(--s2-gray-700), var(--s2-gray-300));
+}
+
+/* The API-docs headings use their own border-bottom (above), so suppress the
+   general decorative h2 underline to avoid a doubled line. */
+body.docs-template:has(.code-rail) .default-content > h2::after {
+  display: none;
+}
+
+/* Per-status response heading. */
+body.docs-template:has(.code-rail) h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+body.docs-template .status-badge {
+  font-family: var(--body-font-family-mono, ui-monospace, monospace);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 3px 10px;
+  border-radius: 5px;
+
+  /* The status heading is a flex row (badge + description). Keep the badge from
+     shrinking and its code from wrapping, so a long description never squeezes
+     e.g. "400" onto two lines. */
+  flex: 0 0 auto;
+  white-space: nowrap;
+
+  /* Neutral fallback for any uncategorized code. */
+  background-color: light-dark(var(--s2-gray-200), var(--s2-gray-800));
+  color: light-dark(var(--s2-gray-800), var(--s2-gray-200));
+}
+
+/* Color the badge by status class (success / redirect / client / server). */
+body.docs-template .status-badge.status-2xx {
+  background-color: light-dark(var(--s2-green-200), var(--s2-green-1100));
+  color: light-dark(var(--s2-green-1100), var(--s2-green-200));
+}
+
+body.docs-template .status-badge.status-3xx {
+  background-color: light-dark(var(--s2-blue-200), var(--s2-blue-1200));
+  color: light-dark(var(--s2-blue-1200), var(--s2-blue-200));
+}
+
+body.docs-template .status-badge.status-4xx {
+  background-color: light-dark(var(--s2-yellow-100), var(--s2-orange-700));
+  color: light-dark(var(--s2-orange-700), var(--s2-yellow-100));
+}
+
+body.docs-template .status-badge.status-5xx {
+  background-color: light-dark(var(--s2-red-200), var(--s2-red-1000));
+  color: light-dark(var(--s2-red-1000), var(--s2-red-200));
+}
+
+body.docs-template .permissions {
+  font-size: 14px;
+  color: light-dark(var(--s2-gray-700), var(--s2-gray-300));
+}
+
+/* Permissions / summary lines render as plain paragraphs; tighten spacing. */
+body.docs-template:has(.code-rail) main .default-content p {
+  margin-block: 6px;
+}
+
+body.docs-template:not(:has(.code-rail)) main .default-content > p {
+  margin-block: 0 1.35em;
+}
+
+/* Deep-linkable headings: offset for sticky header and reveal anchor on hover. */
+body.docs-template .default-content :is(h2, h3, h4)[id] {
+  position: relative;
+  scroll-margin-top: 90px;
+}
+
+body.docs-template .default-content :is(h2, h3, h4)[id] a.heading-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+body.docs-template .default-content :is(h2, h3, h4)[id] a.heading-anchor::after {
+  content: "#";
+  margin-inline-start: 0.4em;
+  color: var(--s2-gray-500);
+  opacity: 0;
+  transition: opacity 0.12s ease-in-out;
+}
+
+body.docs-template .default-content :is(h2, h3, h4)[id]:hover a.heading-anchor::after,
+body.docs-template .default-content :is(h2, h3, h4)[id] a.heading-anchor:focus-visible::after {
+  opacity: 1;
+}
+
+/* Home block icons load as <img> (via decorateIcons), so CSS color can't reach
+   them. Recolor to white in dark mode for contrast on the dark icon tiles. */
+body.dark-theme .cards .card-icon img,
+body.dark-theme .flow .flow-icon img,
+body.dark-theme .link-list .link-list-title .icon img {
+  filter: brightness(0) invert(1);
+}
+
+/* Per-page footer on docs pages: "Edit this page on GitHub" (left) +
+   "Last updated" (right). */
+body.docs-template .doc-pagefooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--doc-border-soft);
+  font-size: 12.5px;
+}
+
+body.docs-template .doc-edit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: light-dark(var(--dark-main-link), var(--light-main-link));
+}
+
+body.docs-template .doc-edit-icon {
+  width: 15px;
+  height: 15px;
+}
+
+body.docs-template .doc-last-modified {
+  margin: 0 0 0 auto;
+  font-style: italic;
+  color: light-dark(var(--s2-gray-600), var(--s2-gray-500));
 }

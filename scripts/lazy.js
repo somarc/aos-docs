@@ -12,7 +12,7 @@
 
   const loadQuickEdit = async (...args) => {
     // eslint-disable-next-line import/no-cycle
-    const { default: initQuickEdit } = await import('/scripts/utils/quickedit.js');
+    const { default: initQuickEdit } = await import('./utils/quickedit.js');
     initQuickEdit(...args);
   };
 

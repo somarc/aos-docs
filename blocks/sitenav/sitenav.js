@@ -7,105 +7,140 @@ const EXP_ICON = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xm
 
 const { codeBase } = getConfig();
 
-function generateSiteList(siteData, pathname) {
-  return Object.keys(siteData).map((key) => {
-    const ul = document.createElement('ul');
+// Navigation is authored in DA alongside the documentation, never as a Git
+// content fixture. The block consumes the rendered shared fragment.
+const DOCS_NAV_PATH = `${codeBase}/fragments/nav/sitenav.plain.html`;
 
-    const inPath = pathname.startsWith(siteData[key].path);
-    if (inPath) ul.classList.add('is-open');
+/** Normalize paths so extensionless content links match generated/static pages. */
+function normalizePath(pathname) {
+  return pathname
+    .replace(/\/index\.html$/, '/')
+    .replace(/\.html$/, '')
+    .replace(/\/$/, '') || '/';
+}
 
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.innerText = siteData[key].title;
-    a.href = siteData[key].path;
-    li.append(a);
+/** Compare an href to the current location by pathname only. */
+function samePath(href) {
+  try {
+    const linkPath = normalizePath(new URL(href, window.location.origin).pathname);
+    const currentPath = normalizePath(window.location.pathname);
+    return linkPath === currentPath;
+  } catch {
+    return false;
+  }
+}
 
-    if (Object.keys(siteData[key].children).length > 0) {
-      const btn = document.createElement('button');
-      btn.className = 'expand-tree';
-      btn.setAttribute('aria-label', 'Expand');
-      btn.innerHTML = EXP_ICON;
-      btn.addEventListener('click', () => {
-        btn.closest('ul').classList.toggle('is-open');
-      });
-      const children = generateSiteList(siteData[key].children, pathname);
-      li.append(btn, ...children);
+/** Decorate one expandable entry: add expand toggle + open state. */
+function decorateEntry(li) {
+  const label = li.querySelector(':scope > .api-group, :scope > a');
+  const childList = li.querySelector(':scope > ul');
+  if (!label || !childList || li.querySelector(':scope > .expand-tree')) return;
+
+  const btn = document.createElement('button');
+  btn.className = 'expand-tree';
+  btn.setAttribute('aria-label', 'Expand');
+  btn.innerHTML = EXP_ICON;
+  const toggle = () => li.classList.toggle('is-open');
+  btn.addEventListener('click', toggle);
+  // A span label can't navigate, so let it toggle the section. A link label
+  // (e.g. "API reference" -> /api-reference) keeps its default navigation; the
+  // chevron button handles expand/collapse, and setActive() opens the section
+  // when its page is the current one.
+  if (label.tagName !== 'A') {
+    label.addEventListener('click', toggle);
+  }
+  label.insertAdjacentElement('afterend', btn);
+
+  // Expand the section containing the current page.
+  if ([...childList.querySelectorAll('a')].some((a) => samePath(a.href))) {
+    li.classList.add('is-open');
+  }
+}
+
+/** Highlight the matching link and keep all ancestor sections open. */
+function setActive(root) {
+  root.querySelectorAll('a.is-active').forEach((a) => a.classList.remove('is-active'));
+  const active = [...root.querySelectorAll('a')].find((a) => samePath(a.href));
+  if (!active) return;
+  active.classList.add('is-active');
+  let section = active.closest('li');
+  while (section) {
+    section.classList.add('is-open');
+    section = section.parentElement?.closest('li');
+  }
+}
+
+async function fetchNav(path) {
+  const resp = await fetch(path);
+  if (!resp.ok) throw Error(`Could not fetch ${path}`);
+  const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+  const list = doc.querySelector('ul');
+  if (!list) throw Error(`${path} has no <ul>`);
+  return list;
+}
+
+async function buildNavTree() {
+  const docsTree = document.importNode(await fetchNav(DOCS_NAV_PATH), true);
+  return docsTree;
+}
+
+function closeMobileNav() {
+  document.body.classList.remove('nav-open');
+  document.dispatchEvent(new CustomEvent('sitenav:close'));
+}
+
+function decorateMobileDrawer(el) {
+  el.id = 'site-navigation';
+
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'sitenav-close';
+  close.setAttribute('aria-label', 'Close navigation menu');
+  close.textContent = '×';
+  close.addEventListener('click', closeMobileNav);
+  el.prepend(close);
+
+  const backdrop = document.createElement('button');
+  backdrop.type = 'button';
+  backdrop.className = 'sitenav-backdrop';
+  backdrop.setAttribute('aria-label', 'Close navigation menu');
+  backdrop.addEventListener('click', closeMobileNav);
+  el.insertAdjacentElement('afterend', backdrop);
+
+  el.addEventListener('click', (e) => {
+    if (e.target.closest('a') && window.matchMedia('(width < 900px)').matches) {
+      closeMobileNav();
     }
-    ul.append(li);
-    return ul;
-  });
-}
-
-function formatSiteData(pageData) {
-  // Sort so that index pages (trailing slash) are processed last
-  const sorted = [...pageData].sort((a, b) => {
-    const aIsIndex = a.path.endsWith('/');
-    const bIsIndex = b.path.endsWith('/');
-    if (aIsIndex && !bIsIndex) return 1;
-    if (!aIsIndex && bIsIndex) return -1;
-    return 0;
   });
 
-  const root = sorted.reduce((acc, item) => {
-    // Normalize path: remove trailing slash
-    const normalizedPath = item.path.replace(/\/$/, '');
-    const segments = normalizedPath.substring(1).split('/').filter(Boolean);
-
-    if (segments.length === 0) return acc;
-
-    let currentNode = acc;
-
-    segments.forEach((segment, index) => {
-      // Create node if it doesn't exist
-      if (!currentNode[segment]) {
-        currentNode[segment] = {
-          children: {},
-          title: segment,
-          path: segments.reduce((segAcc, seg, idx) => {
-            if (idx <= index) return `${segAcc}/${seg}`;
-            return segAcc;
-          }, ''),
-        };
-      }
-
-      // If this is the last segment, set title and path
-      if (index === segments.length - 1) {
-        currentNode[segment].title = item.title;
-        currentNode[segment].path = item.path;
-      }
-
-      currentNode = currentNode[segment].children;
-    });
-
-    return acc;
-  }, {});
-  return root;
-}
-
-async function fetchSiteData() {
-  const resp = await fetch(`${codeBase}/query-index.json`);
-  if (!resp.ok) throw Error('Could not fetch query index');
-  const { data } = await resp.json();
-  return data;
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      closeMobileNav();
+    }
+  });
 }
 
 export default async function init(el) {
+  decorateMobileDrawer(el);
+
   const link = document.createElement('a');
   link.href = '/';
   link.className = 'docket-brand-logo';
-  link.setAttribute('aria-label', 'Home');
-
+  link.setAttribute('aria-label', 'DA CLI documentation home');
   const svg = await getSvg({ paths: [`${codeBase}/img/logos/site.svg`] });
   link.append(svg[0]);
-
+  const name = document.createElement('span');
+  name.className = 'docket-brand-name';
+  name.textContent = 'DA CLI';
+  link.append(name);
   el.append(link);
 
   try {
-    const { pathname } = window.location;
-    const siteData = await fetchSiteData();
-    const formatted = formatSiteData(siteData);
-    const siteList = generateSiteList(formatted, pathname);
-    el.append(...siteList);
+    const tree = await buildNavTree();
+    tree.classList.add('sitenav-tree');
+    tree.querySelectorAll('li').forEach(decorateEntry);
+    el.append(tree);
+    setActive(tree);
   } catch (e) {
     throw Error(e);
   }

@@ -22,8 +22,50 @@ header {
     }
   }
 
+  .nav-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: light-dark(var(--s2-gray-800), var(--s2-gray-50));
+    cursor: pointer;
+
+    .nav-menu-icon {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-menu-icon span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentcolor;
+    }
+
+    &:hover {
+      background: light-dark(var(--s2-gray-100), var(--s2-gray-800));
+    }
+  }
+
   .main-nav-section ul {
     display: none;
+  }
+
+  /* Reset the global list/paragraph margins so the nav links don't inflate the
+     header row. */
+  .main-nav-section li,
+  .main-nav-section p,
+  .main-nav-section a {
+    margin: 0;
+    line-height: var(--body-line-height);
   }
 }
 
@@ -54,8 +96,13 @@ header .actions-section {
     padding: 0 32px 0 72px;
   }
 
+  header .nav-menu-button {
+    display: none;
+  }
+
   header .main-nav-section ul {
     display: flex;
+    align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -63,10 +110,12 @@ header .actions-section {
   }
 }
 
-/* DocSearch styles */
+/* DocSearch styles. Selectors use Algolia DocSearch's own class names, which
+   are PascalCase and can't be renamed, so disable the kebab-case rule here. */
+/* stylelint-disable selector-class-pattern */
 body.DocSearch--active .DocSearch-Modal,
 button.DocSearch-Button {
-  --docsearch-modal-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  --docsearch-modal-shadow: 0 0 0 1px rgb(0 0 0 / 10%);
   --docsearch-modal-background: light-dark(var(--light-color), var(--dark-color));
   --docsearch-footer-background: light-dark(var(--light-color), var(--dark-color));
   --docsearch-muted-color: light-dark(var(--s2-gray-600), var(--s2-gray-500));
@@ -91,7 +140,7 @@ body.DocSearch--active .DocSearch-Modal .DocSearch-Form {
 }
 
 body.DocSearch--active .DocSearch-Modal .DocSearch-Footer {
-  width: unset;  
+  width: unset;
 }
 
 body.DocSearch--active .DocSearch-Modal .DocSearch-Hit a {
@@ -111,8 +160,9 @@ button.DocSearch-Button {
   border-radius: 0.5rem;
 }
 
-@media (width >=900px) {
-  body.DocSearch--active .DocSearch-Modal
+@media (width >= 900px) {
+  body.DocSearch--active .DocSearch-Modal {
     border-radius: 0.5rem;
   }
 }
+/* stylelint-enable selector-class-pattern */
