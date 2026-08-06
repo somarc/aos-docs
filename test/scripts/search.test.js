@@ -41,6 +41,15 @@ describe('First-party documentation search', () => {
     expect(results[0].title).to.equal('DA CLI command families');
   });
 
+  it('rejects off-origin and executable result URLs', () => {
+    const unsafe = [
+      { path: ['java', 'script:alert(1)'].join(''), title: 'Unsafe result' },
+      { path: '//evil.example/result', title: 'Unsafe result' },
+      { path: 'https://evil.example/result', title: 'Unsafe result' },
+    ];
+    expect(searchDocuments(unsafe, 'unsafe')).to.deep.equal([]);
+  });
+
   it('loads and caches query-index data', async () => {
     let calls = 0;
     const fetchImpl = async () => {
@@ -52,6 +61,22 @@ describe('First-party documentation search', () => {
     expect(first).to.deep.equal(documents);
     expect(second).to.equal(first);
     expect(calls).to.equal(1);
+  });
+
+  it('loads every page of a paginated query index', async () => {
+    const page = Array.from({ length: 200 }, (_, index) => ({
+      path: `/page-${index}`,
+      title: `Page ${index}`,
+    }));
+    const fetchImpl = async (url) => ({
+      ok: true,
+      json: async () => (url.includes('offset=0')
+        ? { data: page, total: 201 }
+        : { data: [{ path: '/last-page', title: 'Last page' }], total: 201 }),
+    });
+    const result = await loadSearchIndex(fetchImpl);
+    expect(result).to.have.length(201);
+    expect(result[200].path).to.equal('/last-page');
   });
 
   it('renders results and a useful zero-results state', async () => {

@@ -1,7 +1,11 @@
 const INDEX_PATH = '/query-index.json';
 const RESULT_LIMIT = 8;
+const INDEX_PAGE_SIZE = 200;
+const FAILURE_CACHE_MS = 30000;
 
 let indexPromise;
+let indexFailure;
+let indexFailureUntil = 0;
 let globalDialog;
 let keyboardInstalled = false;
 let formCount = 0;
@@ -16,9 +20,15 @@ function normalized(value) {
 }
 
 function resultPath(entry) {
-  const raw = entry.path || entry.url || '/';
-  const path = raw.startsWith('http') ? new URL(raw).pathname : raw;
-  return path.replace(/\.html$/, '') || '/';
+  try {
+    const url = new URL(entry.path || entry.url || '/', window.location.origin);
+    if (!['http:', 'https:'].includes(url.protocol) || url.origin !== window.location.origin) {
+      return null;
+    }
+    return url.pathname.replace(/\.html$/, '') || '/';
+  } catch {
+    return null;
+  }
 }
 
 export function searchDocuments(documents, query, limit = RESULT_LIMIT) {
@@ -27,11 +37,13 @@ export function searchDocuments(documents, query, limit = RESULT_LIMIT) {
 
   return documents
     .map((entry) => {
+      const safePath = resultPath(entry);
+      if (!safePath) return null;
       const title = normalized(entry.title);
       const description = normalized(entry.description);
       const headings = normalized(entry.headings);
       const content = normalized(entry.content);
-      const path = normalized(resultPath(entry));
+      const path = normalized(safePath);
       const all = `${title} ${description} ${headings} ${content} ${path}`;
       if (!terms.every((term) => all.includes(term))) return null;
 
@@ -47,7 +59,7 @@ export function searchDocuments(documents, query, limit = RESULT_LIMIT) {
         if (path.includes(term)) score += 6;
         if (content.includes(term)) score += 2;
       });
-      return { ...entry, path: resultPath(entry), score };
+      return { ...entry, path: safePath, score };
     })
     .filter(Boolean)
     .sort((a, b) => b.score - a.score || text(a.title).localeCompare(text(b.title)))
@@ -56,18 +68,36 @@ export function searchDocuments(documents, query, limit = RESULT_LIMIT) {
 
 export function resetSearchIndex() {
   indexPromise = undefined;
+  indexFailure = undefined;
+  indexFailureUntil = 0;
 }
 
 export async function loadSearchIndex(fetchImpl = window.fetch.bind(window)) {
+  if (indexFailure && Date.now() < indexFailureUntil) throw indexFailure;
   if (!indexPromise) {
-    indexPromise = fetchImpl(INDEX_PATH, { credentials: 'same-origin' })
-      .then((response) => {
+    indexPromise = (async () => {
+      const documents = [];
+      let offset = 0;
+      let total;
+      do {
+        const url = `${INDEX_PATH}?limit=${INDEX_PAGE_SIZE}&offset=${offset}`;
+        const response = await fetchImpl(url, { credentials: 'same-origin' });
         if (!response.ok) throw new Error(`Search index unavailable (${response.status})`);
-        return response.json();
-      })
-      .then((payload) => (Array.isArray(payload) ? payload : payload.data || []))
+        const payload = await response.json();
+        const page = Array.isArray(payload) ? payload : payload.data || [];
+        documents.push(...page);
+        total = Number.isFinite(payload.total) ? payload.total : undefined;
+        offset += page.length;
+        if (page.length < INDEX_PAGE_SIZE || (total !== undefined && offset >= total)) break;
+      } while (offset < 10000);
+      indexFailure = undefined;
+      indexFailureUntil = 0;
+      return documents;
+    })()
       .catch((error) => {
         indexPromise = undefined;
+        indexFailure = error;
+        indexFailureUntil = Date.now() + FAILURE_CACHE_MS;
         throw error;
       });
   }
@@ -185,7 +215,9 @@ function buildSearchForm({ compact = false } = {}) {
       else input.focus();
     } else if (event.key === 'Escape') {
       event.preventDefault();
-      input.focus();
+      const dialog = form.closest('dialog');
+      if (dialog?.open) dialog.close();
+      else input.focus();
     }
   });
   form.addEventListener('submit', (event) => {
@@ -238,7 +270,8 @@ export function openSiteSearch(trigger) {
   const inline = document.querySelector('.site-search-inline input');
   if (inline && inline.getClientRects().length) {
     inline.focus();
-    inline.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    inline.scrollIntoView({ block: 'center', behavior: reducedMotion ? 'auto' : 'smooth' });
     return;
   }
   if (!globalDialog) globalDialog = createDialog();
@@ -252,6 +285,8 @@ function installKeyboardShortcut() {
   keyboardInstalled = true;
   document.addEventListener('keydown', (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
+      const editable = event.target.closest?.('input, textarea, select, [contenteditable="true"]');
+      if (editable) return;
       event.preventDefault();
       openSiteSearch();
     }
@@ -265,7 +300,8 @@ export function createSearchTrigger(container) {
   button.type = 'button';
   button.className = 'site-search-trigger';
   button.setAttribute('aria-label', 'Search documentation');
-  button.innerHTML = '<span class="site-search-icon" aria-hidden="true"></span><span>Search</span><kbd>⌘K</kbd>';
+  const shortcut = navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl K';
+  button.innerHTML = `<span class="site-search-icon" aria-hidden="true"></span><span>Search</span><kbd>${shortcut}</kbd>`;
   button.addEventListener('click', () => openSiteSearch(button));
   container.append(button);
   return button;
