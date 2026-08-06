@@ -1,3 +1,5 @@
+import { createInlineSearch } from '../../scripts/search.js';
+
 /**
  * Hero block — eyebrow, title, intro, CTAs (+ optional search) on the left,
  * an illustration on the right.
@@ -71,16 +73,8 @@ export default function init(block) {
     copy.append(actions);
   }
 
-  // Optional search affordance — triggers the existing DocSearch button.
-  const search = document.createElement('button');
-  search.type = 'button';
-  search.className = 'hero-search';
-  search.innerHTML = '<span class="hero-search-label">Search the documentation</span><kbd>⌘K</kbd>';
-  search.addEventListener('click', () => {
-    document.querySelector('.DocSearch-Button')?.click();
-  });
-  if (!document.querySelector('.DocSearch-Button')) search.hidden = true;
-  copy.append(search);
+  // Search is backed by the site's first-party query index.
+  createInlineSearch(copy);
 
   // Art cell.
   if (art) {

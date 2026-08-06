@@ -49,4 +49,17 @@ describe('Bounded documentation hero', () => {
 
     expect(block.querySelector('.hero-art').classList.contains('hero-art-placeholder')).to.equal(true);
   });
+
+  it('renders a first-party query-index search field', () => {
+    const block = document.createElement('div');
+    block.innerHTML = '<div><div><h1>Operate every boundary</h1></div><div></div></div>';
+
+    init(block);
+
+    const form = block.querySelector('.site-search-inline form[role="search"]');
+    const input = form.querySelector('input[type="search"]');
+    expect(form).to.exist;
+    expect(input.getAttribute('aria-label')).to.equal('Search the documentation');
+    expect(input.placeholder).to.include('commands');
+  });
 });
