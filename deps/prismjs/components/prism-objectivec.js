@@ -10,4 +10,3 @@ Prism.languages.objectivec = Prism.languages.extend('c', {
 delete Prism.languages.objectivec['class-name'];
 
 Prism.languages.objc = Prism.languages.objectivec;
-

@@ -27,4 +27,3 @@ Prism.languages.wolfram = {
 Prism.languages.mathematica = Prism.languages.wolfram;
 Prism.languages.wl = Prism.languages.wolfram;
 Prism.languages.nb = Prism.languages.wolfram;
-

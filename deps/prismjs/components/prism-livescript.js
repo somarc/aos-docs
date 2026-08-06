@@ -117,4 +117,3 @@ Prism.languages.livescript = {
 };
 
 Prism.languages.livescript['interpolated-string'].inside['interpolation'].inside.rest = Prism.languages.livescript;
-

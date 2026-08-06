@@ -118,4 +118,3 @@ Prism.languages.log = {
 	'operator': /[;:?<=>~/@!$%&+\-|^(){}*#]/,
 	'punctuation': /[\[\].,]/
 };
-

@@ -61,4 +61,3 @@ Prism.languages.bqn = {
 	},
 	'punctuation': /[←⇐↩(){}⟨⟩[\]‿·⋄,.;:?]/
 };
-

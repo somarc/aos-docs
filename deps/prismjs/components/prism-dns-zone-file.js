@@ -31,4 +31,3 @@ Prism.languages['dns-zone-file'] = {
 };
 
 Prism.languages['dns-zone'] = Prism.languages['dns-zone-file'];
-

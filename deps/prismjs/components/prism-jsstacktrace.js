@@ -47,4 +47,3 @@ Prism.languages.jsstacktrace = {
 		}
 	}
 };
-

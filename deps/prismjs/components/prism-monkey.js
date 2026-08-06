@@ -27,4 +27,3 @@ Prism.languages.monkey = {
 	'operator': /\.\.|<[=>]?|>=?|:?=|(?:[+\-*\/&~|]|\b(?:Mod|Shl|Shr)\b)=?|\b(?:And|Not|Or)\b/i,
 	'punctuation': /[.,:;()\[\]]/
 };
-

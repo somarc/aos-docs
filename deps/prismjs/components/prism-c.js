@@ -78,4 +78,3 @@ Prism.languages.insertBefore('c', 'function', {
 });
 
 delete Prism.languages.c['boolean'];
-

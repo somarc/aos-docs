@@ -19,4 +19,3 @@ Prism.languages.bnf = {
 };
 
 Prism.languages.rbnf = Prism.languages.bnf;
-

@@ -177,4 +177,3 @@
 	 */
 	Prism.hooks.add('complete', hook);
 }());
-

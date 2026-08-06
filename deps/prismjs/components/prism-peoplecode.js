@@ -40,4 +40,3 @@ Prism.languages.peoplecode = {
 };
 
 Prism.languages.pcode = Prism.languages.peoplecode;
-

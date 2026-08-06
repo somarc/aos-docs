@@ -52,4 +52,3 @@ Prism.languages.insertBefore('less', 'property', {
 		alias: 'function'
 	}
 });
-

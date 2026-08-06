@@ -82,4 +82,3 @@
 	Prism.languages.cue['string-literal'].inside.interpolation.inside.expression.inside = Prism.languages.cue;
 
 }(Prism));
-

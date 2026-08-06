@@ -15,4 +15,3 @@ Prism.languages.basic = {
 	'operator': /<[=>]?|>=?|[+\-*\/^=&]|\b(?:AND|EQV|IMP|NOT|OR|XOR)\b/i,
 	'punctuation': /[,;:()]/
 };
-

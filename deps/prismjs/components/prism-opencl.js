@@ -59,4 +59,3 @@
 		Prism.languages.insertBefore('cpp', 'keyword', attributes);
 	}
 }(Prism));
-

@@ -21,4 +21,3 @@
 	Prism.languages.npmignore = Prism.languages.ignore;
 
 }(Prism));
-

@@ -58,4 +58,3 @@ Prism.languages.insertBefore('chaiscript', 'string', {
 		}
 	},
 });
-

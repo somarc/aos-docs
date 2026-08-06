@@ -76,4 +76,3 @@ Prism.languages.insertBefore('haxe', 'keyword', {
 		alias: 'important'
 	}
 });
-

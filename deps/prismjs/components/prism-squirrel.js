@@ -45,4 +45,3 @@ Prism.languages.insertBefore('squirrel', 'operator', {
 		alias: 'operator'
 	}
 });
-

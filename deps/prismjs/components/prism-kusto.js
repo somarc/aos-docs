@@ -42,4 +42,3 @@ Prism.languages.kusto = {
 	'operator': /=>|[!=]~|[!=<>]=?|[-+*/%|]|\.\./,
 	'punctuation': /[()\[\]{},;.:]/
 };
-

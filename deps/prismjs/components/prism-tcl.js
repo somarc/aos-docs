@@ -44,4 +44,3 @@ Prism.languages.tcl = {
 	'operator': /!=?|\*\*?|==|&&?|\|\|?|<[=<]?|>[=>]?|[-+~\/%?^]|\b(?:eq|in|ne|ni)\b/,
 	'punctuation': /[{}()\[\]]/
 };
-

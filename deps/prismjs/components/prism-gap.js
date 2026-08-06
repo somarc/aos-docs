@@ -52,4 +52,3 @@ Prism.languages.gap = {
 };
 
 Prism.languages.gap.shell.inside.gap.inside = Prism.languages.gap;
-

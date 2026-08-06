@@ -29,4 +29,3 @@ Prism.languages.clojure = {
 	'operator': /[#@^`~]/,
 	'punctuation': /[{}\[\](),]/
 };
-

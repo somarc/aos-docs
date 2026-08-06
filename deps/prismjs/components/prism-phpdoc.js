@@ -25,4 +25,3 @@
 	Prism.languages.javadoclike.addSupport('php', Prism.languages.phpdoc);
 
 }(Prism));
-

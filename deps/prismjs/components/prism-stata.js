@@ -74,4 +74,3 @@ Prism.languages.stata = {
 };
 
 Prism.languages.stata['string-literal'].inside.interpolation.inside.expression.inside = Prism.languages.stata;
-

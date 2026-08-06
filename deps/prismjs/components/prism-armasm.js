@@ -47,4 +47,3 @@ Prism.languages.armasm = {
 };
 
 Prism.languages['arm-asm'] = Prism.languages.armasm;
-

@@ -63,4 +63,3 @@ Prism.languages.antlr4 = {
 };
 
 Prism.languages.g4 = Prism.languages.antlr4;
-

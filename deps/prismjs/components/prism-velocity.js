@@ -70,4 +70,3 @@
 	Prism.languages.velocity['tag'].inside['attr-value'].inside.rest = Prism.languages.velocity;
 
 }(Prism));
-

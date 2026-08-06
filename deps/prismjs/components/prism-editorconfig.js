@@ -24,4 +24,3 @@ Prism.languages.editorconfig = {
 		}
 	}
 };
-

@@ -26,4 +26,3 @@ Prism.languages.j = {
 	},
 	'punctuation': /[()]/
 };
-

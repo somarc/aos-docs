@@ -140,4 +140,3 @@ Prism.languages.javastacktrace = {
 	}
 
 };
-

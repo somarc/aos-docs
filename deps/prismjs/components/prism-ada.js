@@ -20,4 +20,3 @@ Prism.languages.ada = {
 	'char': /'.'/,
 	'variable': /\b[a-z](?:\w)*\b/i
 };
-

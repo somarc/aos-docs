@@ -29,4 +29,3 @@ Prism.languages.purescript = Prism.languages.extend('haskell', {
 });
 
 Prism.languages.purs = Prism.languages.purescript;
-

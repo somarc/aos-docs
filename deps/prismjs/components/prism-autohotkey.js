@@ -42,4 +42,3 @@ Prism.languages.autohotkey = {
 	'function': /[^(); \t,\n+*\-=?>:\\\/<&%\[\]]+(?=\()/,
 	'punctuation': /[{}[\]():,]/
 };
-

@@ -34,4 +34,3 @@ Prism.languages.cypher = {
 	'operator': /:|<--?|--?>?|<>|=~?|[<>]=?|[+*/%^|]|\.\.\.?/,
 	'punctuation': /[()[\]{},;.]/
 };
-

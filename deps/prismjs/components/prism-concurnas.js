@@ -59,4 +59,3 @@ Prism.languages.insertBefore('concurnas', 'langext', {
 });
 
 Prism.languages.conc = Prism.languages.concurnas;
-

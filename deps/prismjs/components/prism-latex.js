@@ -62,4 +62,3 @@
 	Prism.languages.tex = Prism.languages.latex;
 	Prism.languages.context = Prism.languages.latex;
 }(Prism));
-

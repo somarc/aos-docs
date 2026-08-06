@@ -66,4 +66,3 @@ Prism.languages.git = {
 	 */
 	'commit-sha1': /^commit \w{40}$/m
 };
-

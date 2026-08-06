@@ -6,4 +6,3 @@ Prism.languages.cilkc = Prism.languages.insertBefore('c', 'function', {
 });
 
 Prism.languages['cilk-c'] = Prism.languages['cilkc'];
-

@@ -49,4 +49,3 @@ Prism.languages.q = {
 	},
 	'punctuation': /[(){}\[\];.]/
 };
-

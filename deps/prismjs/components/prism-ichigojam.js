@@ -13,4 +13,3 @@ Prism.languages.ichigojam = {
 	'operator': /<[=>]?|>=?|\|\||&&|[+\-*\/=|&^~!]|\b(?:AND|NOT|OR)\b/i,
 	'punctuation': /[\[,;:()\]]/
 };
-

@@ -126,4 +126,3 @@
 	Prism.languages.rust['attribute'].inside['string'] = Prism.languages.rust['string'];
 
 }(Prism));
-

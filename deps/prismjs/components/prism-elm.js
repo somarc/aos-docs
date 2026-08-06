@@ -43,4 +43,3 @@ Prism.languages.elm = {
 	'constant': /\b(?:[A-Z]\w*\.)*[A-Z]\w*\b/,
 	'punctuation': /[{}[\]|(),.:]/
 };
-

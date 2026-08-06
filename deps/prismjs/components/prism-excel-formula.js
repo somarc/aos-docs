@@ -64,4 +64,3 @@ Prism.languages['excel-formula'] = {
 };
 
 Prism.languages['xlsx'] = Prism.languages['xls'] = Prism.languages['excel-formula'];
-

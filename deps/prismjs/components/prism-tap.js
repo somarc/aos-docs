@@ -20,4 +20,3 @@ Prism.languages.tap = {
 		alias: 'language-yaml'
 	}
 };
-

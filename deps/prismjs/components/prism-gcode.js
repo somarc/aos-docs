@@ -14,4 +14,3 @@ Prism.languages.gcode = {
 	// T0:0:0
 	'punctuation': /[:*]/
 };
-

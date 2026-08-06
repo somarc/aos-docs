@@ -32,4 +32,3 @@ Prism.languages.insertBefore('sqf', 'string', {
 });
 
 delete Prism.languages.sqf['class-name'];
-

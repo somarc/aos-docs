@@ -24,4 +24,3 @@ Prism.languages.verilog = {
 	'operator': /[-+{}^~%*\/?=!<>&|]+/,
 	'punctuation': /[[\];(),.:]/
 };
-

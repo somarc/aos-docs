@@ -25,4 +25,3 @@ Prism.languages.roboconf = {
 	},
 	'punctuation': /[{},.;:=]/
 };
-

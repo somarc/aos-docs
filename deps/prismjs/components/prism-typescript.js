@@ -58,4 +58,3 @@
 	Prism.languages.ts = Prism.languages.typescript;
 
 }(Prism));
-

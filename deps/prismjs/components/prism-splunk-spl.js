@@ -22,4 +22,3 @@ Prism.languages['splunk-spl'] = {
 	'operator': /[<>=]=?|[-+*/%|]/,
 	'punctuation': /[()[\],]/
 };
-

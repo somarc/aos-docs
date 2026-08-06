@@ -67,4 +67,3 @@
 	stringInterpolation.interpolation.inside.content.inside = jq;
 
 }(Prism));
-

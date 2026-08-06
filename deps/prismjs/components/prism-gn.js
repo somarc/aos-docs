@@ -49,4 +49,3 @@ Prism.languages.gn = {
 Prism.languages.gn['string-literal'].inside['interpolation'].inside['expression'].inside = Prism.languages.gn;
 
 Prism.languages.gni = Prism.languages.gn;
-

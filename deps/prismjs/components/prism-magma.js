@@ -33,4 +33,3 @@ Prism.languages.magma = {
 	'operator': /->|[-+*/^~!|#=]|:=|\.\./,
 	'punctuation': /[()[\]{}<>,;.:]/
 };
-

@@ -12,4 +12,3 @@ Prism.languages.hsts = {
 	'operator': /=/,
 	'punctuation': /;/
 };
-

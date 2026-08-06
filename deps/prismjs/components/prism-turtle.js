@@ -52,4 +52,3 @@ Prism.languages.turtle = {
 	}
 };
 Prism.languages.trig = Prism.languages['turtle'];
-

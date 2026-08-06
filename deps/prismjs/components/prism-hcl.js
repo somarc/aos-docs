@@ -61,4 +61,3 @@ Prism.languages.hcl = {
 	'boolean': /\b(?:false|true)\b/i,
 	'punctuation': /[=\[\]{}]/,
 };
-

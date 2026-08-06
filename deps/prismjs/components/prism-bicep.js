@@ -75,4 +75,3 @@ Prism.languages.bicep = {
 };
 
 Prism.languages.bicep['interpolated-string'].inside['interpolation'].inside['expression'].inside = Prism.languages.bicep;
-

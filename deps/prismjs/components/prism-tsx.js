@@ -13,4 +13,3 @@
 	tag.pattern = RegExp(/(^|[^\w$]|(?=<\/))/.source + '(?:' + tag.pattern.source + ')', tag.pattern.flags);
 	tag.lookbehind = true;
 }(Prism));
-

@@ -30,4 +30,3 @@ Prism.languages.iecst = {
 	'function': /\b[a-z_]\w*(?=\s*\()/i,
 	'punctuation': /[()[\].,;]/,
 };
-

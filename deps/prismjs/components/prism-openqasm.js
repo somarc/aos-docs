@@ -21,4 +21,3 @@ Prism.languages.openqasm = {
 };
 
 Prism.languages.qasm = Prism.languages.openqasm;
-

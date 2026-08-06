@@ -18,4 +18,3 @@ Prism.languages.yang = {
 	'operator': /\+/,
 	'punctuation': /[{};:]/
 };
-

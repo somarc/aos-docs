@@ -146,4 +146,3 @@ Prism.languages.swift = {
 Prism.languages.swift['string-literal'].forEach(function (rule) {
 	rule.inside['interpolation'].inside = Prism.languages.swift;
 });
-

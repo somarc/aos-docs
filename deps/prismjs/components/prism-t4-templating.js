@@ -47,4 +47,3 @@
 	Prism.languages['t4-templating'] = Object.defineProperty({}, 'createT4', { value: createT4 });
 
 }(Prism));
-

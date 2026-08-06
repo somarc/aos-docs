@@ -7,4 +7,3 @@ Prism.languages['nand2tetris-hdl'] = {
 	'operator': /=|\.\./,
 	'punctuation': /[{}[\];(),:]/
 };
-

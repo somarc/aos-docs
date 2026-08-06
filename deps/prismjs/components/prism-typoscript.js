@@ -78,4 +78,3 @@
 	Prism.languages.tsconfig = Prism.languages.typoscript;
 
 }(Prism));
-

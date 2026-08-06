@@ -111,4 +111,3 @@ Prism.languages.mermaid = {
 	},
 	'punctuation': /[(){};]/
 };
-

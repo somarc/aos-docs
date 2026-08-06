@@ -67,4 +67,3 @@ Prism.languages.dhall = {
 };
 
 Prism.languages.dhall.string.inside.interpolation.inside.expression.inside = Prism.languages.dhall;
-

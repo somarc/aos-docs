@@ -44,4 +44,3 @@ Prism.languages.mel = {
 };
 
 Prism.languages.mel['code'].inside['statement'].inside = Prism.languages.mel;
-

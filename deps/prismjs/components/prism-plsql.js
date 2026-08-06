@@ -15,4 +15,3 @@ Prism.languages.insertBefore('plsql', 'operator', {
 		alias: 'symbol'
 	},
 });
-

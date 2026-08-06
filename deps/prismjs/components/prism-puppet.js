@@ -134,4 +134,3 @@
 	Prism.languages.puppet['heredoc'][0].inside.interpolation = interpolation;
 	Prism.languages.puppet['string'].inside['double-quoted'].inside.interpolation = interpolation;
 }(Prism));
-

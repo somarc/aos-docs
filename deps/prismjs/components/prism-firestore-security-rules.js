@@ -33,4 +33,3 @@ Prism.languages.insertBefore('firestore-security-rules', 'keyword', {
 		}
 	},
 });
-

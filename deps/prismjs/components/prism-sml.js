@@ -66,4 +66,3 @@
 	Prism.languages.smlnj = Prism.languages.sml;
 
 }(Prism));
-

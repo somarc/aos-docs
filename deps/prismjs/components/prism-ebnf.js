@@ -20,4 +20,3 @@ Prism.languages.ebnf = {
 	'punctuation': /\([:/]|[:/]\)|[.,;()[\]{}]/,
 	'operator': /[-=|*/!]/
 };
-

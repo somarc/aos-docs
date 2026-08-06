@@ -76,4 +76,3 @@
 	Prism.languages.javadoclike.addSupport('javascript', Prism.languages.jsdoc);
 
 }(Prism));
-

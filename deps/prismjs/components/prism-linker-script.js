@@ -28,4 +28,3 @@ Prism.languages['linker-script'] = {
 };
 
 Prism.languages['ld'] = Prism.languages['linker-script'];
-

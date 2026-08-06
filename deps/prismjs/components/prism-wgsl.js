@@ -67,4 +67,3 @@ Prism.languages.wgsl = {
 	],
 	'punctuation': /[@(){}[\],;<>:.]/,
 };
-

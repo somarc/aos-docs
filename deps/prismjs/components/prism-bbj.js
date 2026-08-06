@@ -17,4 +17,3 @@
 		'punctuation': /[.,;:()]/
 	};
 }(Prism));
-

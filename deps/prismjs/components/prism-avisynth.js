@@ -186,4 +186,3 @@
 	Prism.languages.avs = Prism.languages.avisynth;
 
 }(Prism));
-

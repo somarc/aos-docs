@@ -40,4 +40,3 @@ Prism.languages.ini = {
 	},
 	'punctuation': /=/
 };
-

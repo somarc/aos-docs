@@ -25,4 +25,3 @@ Prism.languages.gdscript = {
 	'operator': /->|:=|&&|\|\||<<|>>|[-+*/%&|!<>=]=?|[~^]/,
 	'punctuation': /[.:,;()[\]{}]/
 };
-

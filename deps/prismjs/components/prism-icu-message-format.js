@@ -146,4 +146,3 @@
 	Prism.languages['icu-message-format'].argument.inside.content.inside['choice-style'].inside.rest = Prism.languages['icu-message-format'];
 
 }(Prism));
-

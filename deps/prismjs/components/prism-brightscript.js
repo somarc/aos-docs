@@ -42,4 +42,3 @@ Prism.languages.brightscript = {
 };
 
 Prism.languages.brightscript['directive-statement'].inside.expression.inside = Prism.languages.brightscript;
-

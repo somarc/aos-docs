@@ -56,4 +56,3 @@ Prism.languages.ocaml = {
 	'operator': /\.[.~]|:[=>]|[=<>@^|&+\-*\/$%!?~][!$%&*+\-.\/:<=>?@^|~]*|\b(?:and|asr|land|lor|lsl|lsr|lxor|mod|or)\b/,
 	'punctuation': /;;|::|[(){}\[\].,:;#]|\b_\b/
 };
-

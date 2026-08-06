@@ -35,4 +35,3 @@ Prism.languages.bro = {
 
 	'punctuation': /[{}[\];(),.:]/
 };
-

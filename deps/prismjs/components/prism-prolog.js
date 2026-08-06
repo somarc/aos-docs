@@ -17,4 +17,3 @@ Prism.languages.prolog = {
 	'operator': /[:\\=><\-?*@\/;+^|!$.]+|\b(?:is|mod|not|xor)\b/,
 	'punctuation': /[(){}\[\],]/
 };
-

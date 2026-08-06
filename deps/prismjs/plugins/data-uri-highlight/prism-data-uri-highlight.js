@@ -92,4 +92,3 @@
 		Prism.plugins.dataURIHighlight.processGrammar(env.grammar);
 	});
 }());
-

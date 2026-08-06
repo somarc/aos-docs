@@ -21,4 +21,3 @@ Prism.languages.insertBefore('birb', 'function', {
 		alias: 'symbol'
 	}
 });
-

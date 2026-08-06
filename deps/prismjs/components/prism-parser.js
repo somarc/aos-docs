@@ -71,4 +71,3 @@
 	}, parser['tag'].inside['attr-value']);
 
 }(Prism));
-

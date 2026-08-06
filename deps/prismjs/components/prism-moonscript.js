@@ -55,4 +55,3 @@ Prism.languages.moonscript = {
 Prism.languages.moonscript.string[1].inside.interpolation.inside.moonscript.inside = Prism.languages.moonscript;
 
 Prism.languages.moon = Prism.languages.moonscript;
-

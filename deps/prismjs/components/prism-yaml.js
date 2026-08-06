@@ -81,4 +81,3 @@
 	Prism.languages.yml = Prism.languages.yaml;
 
 }(Prism));
-

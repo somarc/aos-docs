@@ -16,4 +16,3 @@ Prism.languages.insertBefore('sparql', 'punctuation', {
 });
 
 Prism.languages.rq = Prism.languages.sparql;
-

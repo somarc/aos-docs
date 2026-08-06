@@ -45,4 +45,3 @@ Prism.languages.apacheconf = {
 	'variable': /[$%]\{?(?:\w\.?[-+:]?)+\}?/,
 	'regex': /\^?.*\$|\^.*\$?/
 };
-

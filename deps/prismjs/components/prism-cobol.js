@@ -51,4 +51,3 @@ Prism.languages.cobol = {
 	],
 	'punctuation': /[.:,()]/
 };
-

@@ -1261,4 +1261,3 @@ if (typeof global !== 'undefined') {
  * @global
  * @public
  */
-

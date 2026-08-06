@@ -187,4 +187,3 @@
 
 	Prism.languages.rb = Prism.languages.ruby;
 }(Prism));
-
