@@ -275,13 +275,13 @@ img {
   display: none;
 }
 
-@media (width >= 720px) {
+@media (width >= 900px) {
   body {
     display: grid;
     grid-template:
       "sitenav header" auto
       "sitenav main" 1fr
-      "sitenav footer" auto / 248px minmax(0, 1fr);
+      "sitenav footer" auto / 280px minmax(0, 1fr);
     justify-content: start;
     min-height: 100vh;
 
@@ -297,22 +297,12 @@ img {
 
     main {
       grid-area: main;
-      margin: 0 40px;
+      margin: 0 56px;
     }
 
     footer {
       grid-area: footer;
     }
-  }
-}
-
-@media (width >= 1024px) {
-  body {
-    grid-template-columns: 280px minmax(0, 1fr);
-  }
-
-  main {
-    margin-inline: 56px;
   }
 }
 

@@ -26,10 +26,9 @@ function decorateMobileNavToggle(section) {
   button.innerHTML = '<span class="nav-menu-icon"><span></span><span></span><span></span></span>';
 
   button.addEventListener('click', () => {
-    const open = !document.body.classList.contains('nav-open');
-    document.body.classList.toggle('nav-open', open);
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    document.dispatchEvent(new CustomEvent('sitenav:open', { detail: { trigger: button } }));
+    button.setAttribute('aria-expanded', 'true');
+    button.setAttribute('aria-label', 'Close navigation menu');
   });
 
   document.addEventListener('sitenav:close', () => {
