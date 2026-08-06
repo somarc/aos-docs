@@ -1,0 +1,146 @@
+/* Single JSON example panel for the API reference pages. Self-contained dark
+   panel + a compact prism theme (VS Code Dark tones) for JSON tokens. */
+
+.code-sample {
+  position: relative;
+  margin: 16px 0 24px;
+
+  /* Avoid a flash of unstyled code; revealed once prism has run. */
+  visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.code-sample.is-highlighted {
+  visibility: visible;
+}
+
+/* Header bar ------------------------------------------------------------- */
+
+.code-sample .code-sample-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: light-dark(#eff1f3, #161b22);
+  border: 1px solid light-dark(var(--s2-gray-300), var(--s2-gray-800));
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+
+.code-sample .code-sample-title {
+  font-family: ui-monospace, "SF Mono", menlo, consolas, monospace;
+  font-size: 12px;
+  color: light-dark(#24292f, #c9d1d9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status code chip in the panel title, colored by status class. */
+.code-sample .code-status {
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background-color: light-dark(var(--s2-gray-200), var(--s2-gray-800));
+  color: light-dark(var(--s2-gray-800), var(--s2-gray-200));
+}
+
+.code-sample .code-status.status-2xx {
+  background-color: light-dark(var(--s2-green-200), var(--s2-green-1100));
+  color: light-dark(var(--s2-green-1100), var(--s2-green-200));
+}
+
+.code-sample .code-status.status-3xx {
+  background-color: light-dark(var(--s2-blue-200), var(--s2-blue-1200));
+  color: light-dark(var(--s2-blue-1200), var(--s2-blue-200));
+}
+
+.code-sample .code-status.status-4xx {
+  background-color: light-dark(var(--s2-yellow-100), var(--s2-orange-700));
+  color: light-dark(var(--s2-orange-700), var(--s2-yellow-100));
+}
+
+.code-sample .code-status.status-5xx {
+  background-color: light-dark(var(--s2-red-200), var(--s2-red-1000));
+  color: light-dark(var(--s2-red-1000), var(--s2-red-200));
+}
+
+.code-sample pre {
+  margin: 0;
+  padding: 20px 22px;
+  overflow: auto;
+  background: light-dark(#f6f8fa, #0d1117);
+  color: light-dark(#24292f, #e6edf3);
+  border-radius: 12px;
+  border: 1px solid light-dark(var(--s2-gray-300), var(--s2-gray-800));
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+/* When a header bar is present, flatten the corners at the seam between them. */
+.code-sample .code-sample-head + pre {
+  border-radius: 0 0 12px 12px;
+}
+
+.code-sample code[class*="language-"] {
+  font-family: ui-monospace, "SF Mono", menlo, consolas, monospace;
+  white-space: pre;
+  background: none;
+  padding: 0;
+}
+
+/* Copy button ------------------------------------------------------------ */
+
+.code-sample .copy-code-btn {
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: light-dark(#24292f, #e6edf3);
+  background: light-dark(rgb(0 0 0 / 6%), rgb(255 255 255 / 12%));
+  transition: background 0.15s ease;
+}
+
+.code-sample .copy-code-btn:hover {
+  background: light-dark(rgb(0 0 0 / 12%), rgb(255 255 255 / 20%));
+}
+
+.code-sample .copy-code-btn.is-copied {
+  background: var(--s2-green-700);
+  color: #fff;
+  opacity: 1;
+}
+
+/* JSON token colors (dark, GitHub-dark tones) ---------------------------- */
+
+.code-sample .token.property { color: #79c0ff; }
+
+.code-sample .token.string { color: #a5d6ff; }
+
+.code-sample .token.number,
+.code-sample .token.boolean,
+.code-sample .token.null,
+.code-sample .token.keyword { color: #ffa657; }
+
+.code-sample .token.punctuation,
+.code-sample .token.operator { color: #8b949e; }
+
+/* JSON token colors (light, GitHub-light tones to match the inline code
+   block). Scoped to .light-theme so it overrides the dark defaults above. */
+.light-theme .code-sample .token.property { color: #0550ae; }
+
+.light-theme .code-sample .token.string { color: #0a3069; }
+
+.light-theme .code-sample .token.number,
+.light-theme .code-sample .token.boolean,
+.light-theme .code-sample .token.null { color: #0550ae; }
+
+.light-theme .code-sample .token.keyword { color: #cf222e; }
+
+.light-theme .code-sample .token.punctuation,
+.light-theme .code-sample .token.operator { color: #24292f; }

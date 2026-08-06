@@ -4,6 +4,11 @@
   max-width: 100px;
   overflow: hidden;
 
+  /* Plain-text blocks have no meaningful language label; hide the tab row. */
+  &.code-plain .code-tabs-container {
+    display: none;
+  }
+
   .code-tabs-list {
     display: flex;
     margin: 0;

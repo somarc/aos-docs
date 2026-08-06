@@ -14,6 +14,49 @@ function decorateMainNav(el) {
   el.classList.add('main-nav-section');
 }
 
+function decorateMobileNavToggle(section) {
+  if (section.querySelector('.nav-menu-button')) return;
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'nav-menu-button';
+  button.setAttribute('aria-controls', 'site-navigation');
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-label', 'Loading navigation menu');
+  button.disabled = true;
+  button.innerHTML = '<span class="nav-menu-icon"><span></span><span></span><span></span></span>';
+
+  button.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('sitenav:toggle', { detail: { trigger: button } }));
+  });
+
+  const syncState = ({ ready = false, open = false, error = false } = {}) => {
+    let label = 'Loading navigation menu';
+    if (error) label = 'Navigation unavailable';
+    else if (open) label = 'Close navigation menu';
+    else if (ready) label = 'Open navigation menu';
+
+    button.disabled = !ready;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', label);
+  };
+
+  document.addEventListener('sitenav:state', (event) => syncState(event.detail));
+
+  const state = document.body.dataset.sitenavState;
+  if (state) {
+    syncState({
+      ready: state === 'closed' || state === 'open',
+      open: state === 'open',
+      error: state === 'error',
+    });
+  } else {
+    document.dispatchEvent(new CustomEvent('sitenav:state-request'));
+  }
+
+  section.prepend(button);
+}
+
 async function decorateLink(section, pattern, name) {
   const link = section.querySelector(`[href*="${pattern}"]`);
   if (!link) return;
@@ -89,10 +132,10 @@ async function decorateSearch(actions) {
 }
 
 async function decorateHeader(fragment) {
-  const img = fragment.querySelector('.section:first-child img');
-  if (img) {
-    const brand = img.closest('.section');
+  const brand = fragment.querySelector('.section:first-child');
+  if (brand) {
     decorateBrand(brand);
+    decorateMobileNavToggle(brand);
   }
 
   const ul = fragment.querySelector('ul');

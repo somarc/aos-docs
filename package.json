@@ -1,7 +1,7 @@
 {
-  "name": "nx-boilerplate",
+  "name": "@somarc/aos-docs",
   "version": "1.3.0",
-  "description": "An extremely minimal boilerplate for AEM.",
+  "description": "Docket-based EDS documentation for DA CLI and AOS",
   "scripts": {
     "lint:js": "eslint .",
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aabsites/nx-boilerplate.git"
+    "url": "git+https://github.com/somarc/aos-docs.git"
   },
   "author": "Adobe",
   "license": "Apache License 2.0",
   "bugs": {
-    "url": "https://github.com/adobe/aem-boilerplate/issues"
+    "url": "https://github.com/somarc/aos-docs/issues"
   },
-  "homepage": "https://github.com/adobe/aem-boilerplate#readme",
+  "homepage": "https://main--aos-docs--somarc.aem.live/",
   "devDependencies": {
     "@babel/core": "7.24.5",
     "@babel/eslint-parser": "7.24.5",

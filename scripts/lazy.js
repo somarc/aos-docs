@@ -1,6 +1,5 @@
 (function loadLazy() {
   import('./utils/lazyhash.js');
-  import('./utils/favicon.js');
   import('./utils/footer.js').then(({ default: footer }) => footer());
   import('../deps/rum.js').then(({ sampleRUM }) => {
     sampleRUM('load');
@@ -12,7 +11,7 @@
 
   const loadQuickEdit = async (...args) => {
     // eslint-disable-next-line import/no-cycle
-    const { default: initQuickEdit } = await import('/scripts/utils/quickedit.js');
+    const { default: initQuickEdit } = await import('./utils/quickedit.js');
     initQuickEdit(...args);
   };
 
