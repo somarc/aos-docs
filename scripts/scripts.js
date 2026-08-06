@@ -1,4 +1,5 @@
 import { loadArea, loadBlock, setConfig } from './nx.js';
+import decoratePageDetails from './utils/page-details.js';
 
 // Supported locales
 const locales = {
@@ -72,6 +73,12 @@ export async function loadPage() {
   loadNav('sitenav');
 
   await loadArea();
+  decoratePageDetails();
+  if (document.querySelector('meta[name="error-page"][content="not-found"]')) {
+    const { default: decorateNotFound } = await import('./not-found.js');
+    decorateNotFound();
+    return;
+  }
   await loadNav('pagenav');
 }
 

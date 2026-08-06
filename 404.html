@@ -3,6 +3,8 @@
   <head>
     <title>404</title>
     <meta name="template" content="docs"/>
+    <meta name="error-page" content="not-found"/>
+    <meta name="robots" content="noindex"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/styles/styles.css"/>
     <script src="/scripts/nx.js" type="module"></script>
@@ -11,7 +13,13 @@
   </head>
   <body>
     <header></header>
-    <main><div><h1>404 - Not found</h1><p>This content cannot be found.</p></div></main>
+    <main><div>
+      <p>Documentation</p>
+      <h1>We could not find that page</h1>
+      <p>The requested path <code class="not-found-path"></code> may have moved, changed names, or never existed.</p>
+      <p class="not-found-actions"><a href="/">Documentation home</a> <a href="/getting-started">Get started</a> <a href="/reference/commands">Command reference</a></p>
+      <section class="not-found-search"></section>
+    </div></main>
     <footer></footer>
   </body>
 </html>

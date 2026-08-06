@@ -3,14 +3,20 @@ import init from '../../blocks/hero/hero.js';
 
 describe('Bounded documentation hero', () => {
   let originalMatchMedia;
+  let originalConnection;
 
   beforeEach(() => {
     originalMatchMedia = window.matchMedia;
+    originalConnection = navigator.connection;
     window.matchMedia = () => ({ matches: true });
   });
 
   afterEach(() => {
     window.matchMedia = originalMatchMedia;
+    Object.defineProperty(navigator, 'connection', {
+      configurable: true,
+      value: originalConnection,
+    });
     document.body.innerHTML = '';
   });
 
@@ -48,6 +54,24 @@ describe('Bounded documentation hero', () => {
     init(block);
 
     expect(block.querySelector('.hero-art').classList.contains('hero-art-placeholder')).to.equal(true);
+  });
+
+  it('does not load ambient video when data saver is enabled', () => {
+    window.matchMedia = () => ({ matches: false });
+    Object.defineProperty(navigator, 'connection', {
+      configurable: true,
+      value: { saveData: true },
+    });
+    const block = document.createElement('div');
+    block.innerHTML = `<div>
+      <div><h1>Operate every boundary</h1></div>
+      <div><p><a href="https://example.com/hero.mp4">Ambient loop</a></p><picture><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt=""></picture></div>
+    </div>`;
+
+    init(block);
+
+    expect(block.querySelector('video source')).not.to.exist;
+    expect(block.querySelector('.hero-art-poster')).to.exist;
   });
 
   it('renders a first-party query-index search field', () => {

@@ -6,8 +6,28 @@ export default function init(el) {
   const mainElement = document.querySelector('main');
   if (!mainElement) return;
 
-  const headings = Array.from(mainElement.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+  const headings = Array.from(mainElement.querySelectorAll('h2, h3, h4, h5, h6'));
   if (headings.length === 0) return;
+
+  const usedIds = new Set([...document.querySelectorAll('[id]')].map(({ id }) => id));
+  headings.forEach((heading) => {
+    if (heading.id) return;
+    const base = heading.textContent
+      .trim()
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '') || 'section';
+    let candidate = base;
+    let suffix = 2;
+    while (usedIds.has(candidate)) {
+      candidate = `${base}-${suffix}`;
+      suffix += 1;
+    }
+    heading.id = candidate;
+    usedIds.add(candidate);
+  });
 
   const headingData = headings.map((heading) => {
     const a = document.createElement('a');
@@ -22,6 +42,11 @@ export default function init(el) {
     };
   });
 
+  const title = document.createElement('p');
+  title.className = 'pagenav-title';
+  title.textContent = 'On this page';
+  el.append(title);
+
   // Create the main unordered list
   const rootUl = document.createElement('ul');
 
@@ -31,11 +56,7 @@ export default function init(el) {
 
     // If this is the first heading or a top-level heading
     if (i === 0) {
-      const ul = document.createElement('ul');
-      current.element.innerText = 'On this page';
       rootUl.appendChild(current.element);
-      current.element.appendChild(ul);
-      current.childList = ul;
     } else {
       // Find the appropriate parent heading
       let j = i - 1;

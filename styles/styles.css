@@ -592,20 +592,50 @@ body.docs-template .doc-pagefooter {
   font-size: 12.5px;
 }
 
-body.docs-template .doc-edit-link {
+body.docs-template .doc-pagefacts {
+  display: flex;
+  align-items: center;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+
+body.docs-template .doc-page-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 9px;
+  border: 1px solid light-dark(var(--s2-gray-300), var(--s2-gray-700));
+  border-radius: 999px;
+  color: light-dark(var(--s2-gray-800), var(--s2-gray-100));
+  font-weight: 700;
+}
+
+body.docs-template .doc-page-status-direction,
+body.docs-template .doc-page-status-advanced,
+body.docs-template .doc-page-status-integration {
+  border-color: light-dark(var(--s2-orange-700), var(--s2-yellow-600));
+  color: light-dark(var(--s2-orange-900), var(--s2-yellow-300));
+}
+
+body.docs-template .doc-feedback-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-inline-start: auto;
   color: light-dark(var(--dark-main-link), var(--light-main-link));
 }
 
-body.docs-template .doc-edit-icon {
-  width: 15px;
-  height: 15px;
+body.docs-template :is(.doc-applies-to, .doc-last-reviewed) {
+  color: light-dark(var(--s2-gray-600), var(--s2-gray-500));
 }
 
-body.docs-template .doc-last-modified {
-  margin: 0 0 0 auto;
-  font-style: italic;
-  color: light-dark(var(--s2-gray-600), var(--s2-gray-500));
+.not-found-actions {
+  display: flex;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+}
+
+.not-found-search {
+  max-width: 720px;
+  margin-top: 32px;
 }

@@ -37,6 +37,12 @@ function videoMimeType(src) {
   }
 }
 
+function allowsAmbientVideo() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = Boolean(navigator.connection?.saveData);
+  return !reducedMotion && !saveData;
+}
+
 export default function init(block) {
   const cells = [...block.querySelectorAll(':scope > div > div')];
   const [copy, art] = cells;
@@ -106,8 +112,9 @@ export default function init(block) {
       art.append(video);
       art.classList.add('has-video');
 
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (allowsAmbientVideo()) {
         afterWindowLoad(() => {
+          if (!allowsAmbientVideo()) return;
           const source = document.createElement('source');
           source.src = videoSrc;
           const type = videoMimeType(videoSrc);
