@@ -1,4 +1,5 @@
-import { getConfig, getMetadata, loadStyle } from '../../scripts/nx.js';
+import { getConfig, getMetadata } from '../../scripts/nx.js';
+import { createSearchTrigger } from '../../scripts/search.js';
 import getSvg from '../../scripts/utils/svg.js';
 import { loadFragment } from '../fragment/fragment.js';
 
@@ -98,37 +99,12 @@ async function decorateActions(section) {
   await Promise.all([color, discord, github]);
 }
 
-async function decorateSearch(actions) {
-  try {
-    // fetch site config
-    const configReq = await fetch('/config.json');
-    if (!configReq.ok) {
-      return;
-    }
-    const configData = await configReq.json();
-    if (!configData.public || !configData.public.search) {
-      return;
-    }
-
-    const searchConfig = { ...configData.public.search };
-
-    // init search
-    const search = document.createElement('div');
-    search.id = 'search';
-    actions.before(search);
-
-    loadStyle('https://cdn.jsdelivr.net/npm/@docsearch/css@4.0.1');
-    const docsearch = await import('https://cdn.jsdelivr.net/npm/@docsearch/js@4.0.1/+esm');
-    docsearch.default({
-      container: search,
-      appId: searchConfig.agolia_appId,
-      apiKey: searchConfig.agolia_appKey,
-      indices: searchConfig.agolia_indices,
-    });
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
-  }
+function decorateSearch(actions) {
+  if (!actions || actions.querySelector('.site-search-trigger')) return;
+  const search = document.createElement('div');
+  search.id = 'search';
+  actions.prepend(search);
+  createSearchTrigger(search);
 }
 
 async function decorateHeader(fragment) {
