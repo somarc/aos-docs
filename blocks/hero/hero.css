@@ -124,11 +124,38 @@
   background: var(--doc-surface-2);
 }
 
-.hero-art img {
+.hero-art .hero-art-poster,
+.hero-art .hero-art-poster img,
+.hero-art video {
   width: 100%;
   height: 100%;
+}
+
+.hero-art .hero-art-poster,
+.hero-art video {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-art .hero-art-poster img,
+.hero-art video {
   object-fit: cover;
   display: block;
+}
+
+.hero-art .hero-art-poster img {
+  filter: saturate(0.88) contrast(1.04) brightness(0.92);
+}
+
+.hero-art video {
+  z-index: 1;
+  opacity: 0;
+  filter: saturate(0.88) contrast(1.04) brightness(0.92);
+  transition: opacity 500ms ease;
+}
+
+.hero-art.is-playing video {
+  opacity: 1;
 }
 
 .hero-art-placeholder {
@@ -171,6 +198,12 @@
     height: 44px;
     padding: 0 22px;
     font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-art video {
+    display: none;
   }
 }
 
