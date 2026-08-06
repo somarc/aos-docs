@@ -88,4 +88,33 @@ describe('Responsive documentation navigation', () => {
     expect(document.activeElement).to.equal(visible[visible.length - 1]);
     nav.querySelector('.sitenav-close').click();
   });
+
+  it('publishes an observable error state instead of an empty drawer', async () => {
+    const workingFetch = window.fetch;
+    const failedNav = document.createElement('nav');
+    document.querySelector('main').before(failedNav);
+    let state;
+    const capture = (event) => { state = event.detail; };
+    document.addEventListener('sitenav:state', capture);
+    window.fetch = async (url) => new Response(
+      String(url).includes('sitenav') ? '' : SVG,
+      { status: String(url).includes('sitenav') ? 500 : 200 },
+    );
+
+    try {
+      let failed = false;
+      try {
+        await init(failedNav);
+      } catch {
+        failed = true;
+      }
+      expect(failed).to.equal(true);
+      expect(failedNav.isConnected).to.equal(false);
+      expect(document.body.dataset.sitenavState).to.equal('error');
+      expect(state).to.deep.equal({ ready: false, open: false, error: true });
+    } finally {
+      window.fetch = workingFetch;
+      document.removeEventListener('sitenav:state', capture);
+    }
+  });
 });
