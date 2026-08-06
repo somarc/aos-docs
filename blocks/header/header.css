@@ -99,6 +99,12 @@ header .actions-section {
   header .nav-menu-button {
     display: none;
   }
+}
+
+@media (width >= 1024px) {
+  .header {
+    padding-left: 56px;
+  }
 
   header .main-nav-section ul {
     display: flex;
@@ -106,13 +112,7 @@ header .actions-section {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: var(--spacing-xl);
-  }
-}
-
-@media (width >= 1024px) {
-  .header {
-    padding-left: 56px;
+    gap: var(--spacing-l);
   }
 }
 
