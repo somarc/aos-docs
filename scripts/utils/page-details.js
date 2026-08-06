@@ -28,7 +28,7 @@ export default function decoratePageDetails(main = document.querySelector('main'
   const status = STATUS_LABELS[statusKey];
   const lastReviewed = getMetadata('last-reviewed');
 
-  const footer = document.createElement('footer');
+  const footer = document.createElement('aside');
   footer.className = 'doc-pagefooter';
   footer.setAttribute('aria-label', 'Page details');
 
