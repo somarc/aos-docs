@@ -53,4 +53,3 @@ export default async function init(a) {
     defElToReplace.parentElement.replaceChild(content, defElToReplace);
   }
 }
-

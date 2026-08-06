@@ -27,4 +27,3 @@ export default function init(block) {
     cell.querySelector('a')?.classList.add('link-list-link');
   });
 }
-

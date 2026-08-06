@@ -4,4 +4,3 @@
   window.localStorage.removeItem('lazyhash');
   window.document.getElementById(id)?.scrollIntoView();
 }());
-

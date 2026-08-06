@@ -10,4 +10,3 @@ async function loadModule(origin, payload) {
 export default function init(payload) {
   loadModule('https://da.live', payload);
 }
-

@@ -52,4 +52,3 @@ export default function init(block) {
 
   block.append(track);
 }
-

@@ -11,4 +11,3 @@ export default function observe(el, callback) {
   el.callback = callback;
   io.observe(el);
 }
-

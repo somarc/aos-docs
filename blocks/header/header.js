@@ -149,4 +149,3 @@ export default async function init(el) {
     throw Error(e);
   }
 }
-

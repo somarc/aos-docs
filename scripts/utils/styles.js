@@ -21,4 +21,3 @@ const loadStyle = (() => {
 })();
 
 export default loadStyle;
-
