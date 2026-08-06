@@ -81,6 +81,10 @@
   text-decoration: none;
 }
 
+.hero-search[hidden] {
+  display: none;
+}
+
 .hero-search {
   display: flex;
   align-items: center;
