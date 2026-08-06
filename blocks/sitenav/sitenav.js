@@ -11,6 +11,7 @@ const DESKTOP_NAV_QUERY = '(width >= 900px)';
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 let disclosureId = 0;
 let returnFocus = null;
+let controller = null;
 
 function normalizePath(pathname) {
   return pathname
@@ -120,6 +121,17 @@ function setPageInert(inert) {
   });
 }
 
+function publishState(state, error = false) {
+  document.body.dataset.sitenavState = error ? 'error' : state;
+  document.dispatchEvent(new CustomEvent('sitenav:state', {
+    detail: {
+      ready: !error,
+      open: state === 'open',
+      error,
+    },
+  }));
+}
+
 function syncDrawerAccessibility(el, open) {
   const mobile = !window.matchMedia(DESKTOP_NAV_QUERY).matches;
   el.setAttribute('aria-hidden', String(mobile && !open));
@@ -132,6 +144,7 @@ function closeMobileNav(el, { restoreFocus = true } = {}) {
   setPageInert(false);
   syncDrawerAccessibility(el, false);
   document.dispatchEvent(new CustomEvent('sitenav:close'));
+  publishState('closed');
   if (wasOpen && restoreFocus && returnFocus?.isConnected) returnFocus.focus();
   returnFocus = null;
 }
@@ -142,6 +155,7 @@ function openMobileNav(el, trigger) {
   document.body.classList.add('nav-open');
   syncDrawerAccessibility(el, true);
   setPageInert(true);
+  publishState('open');
   el.querySelector('.sitenav-close')?.focus();
 }
 
@@ -201,13 +215,21 @@ function decorateMobileDrawer(el) {
     syncDrawerAccessibility(el, false);
   });
 
-  document.addEventListener('sitenav:open', (event) => openMobileNav(el, event.detail?.trigger));
+  controller = {
+    toggle(trigger) {
+      if (document.body.classList.contains('nav-open')) closeMobileNav(el);
+      else openMobileNav(el, trigger);
+    },
+    state() {
+      publishState(document.body.classList.contains('nav-open') ? 'open' : 'closed');
+    },
+  };
+  document.addEventListener('sitenav:toggle', (event) => controller.toggle(event.detail?.trigger));
+  document.addEventListener('sitenav:state-request', () => controller.state());
   syncDrawerAccessibility(el, false);
 }
 
 export default async function init(el) {
-  decorateMobileDrawer(el);
-
   const link = document.createElement('a');
   link.href = '/';
   link.className = 'docket-brand-logo';
@@ -220,9 +242,18 @@ export default async function init(el) {
   link.append(name);
   el.append(link);
 
-  const tree = await buildNavTree();
-  tree.classList.add('sitenav-tree');
-  tree.querySelectorAll('li').forEach(decorateEntry);
-  el.append(tree);
-  setActive(tree);
+  try {
+    const tree = await buildNavTree();
+    tree.classList.add('sitenav-tree');
+    tree.querySelectorAll('li').forEach(decorateEntry);
+    el.append(tree);
+    setActive(tree);
+    decorateMobileDrawer(el);
+    publishState('closed');
+  } catch (error) {
+    el.remove();
+    document.body.dataset.sitenavState = 'error';
+    publishState('closed', true);
+    throw error;
+  }
 }

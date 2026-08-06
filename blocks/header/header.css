@@ -54,6 +54,11 @@ header {
       background: light-dark(var(--s2-gray-100), var(--s2-gray-800));
     }
 
+    &:disabled {
+      cursor: wait;
+      opacity: 0.45;
+    }
+
     &:focus-visible {
       outline: 2px solid var(--doc-accent);
       outline-offset: 2px;

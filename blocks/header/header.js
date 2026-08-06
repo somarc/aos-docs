@@ -22,19 +22,37 @@ function decorateMobileNavToggle(section) {
   button.className = 'nav-menu-button';
   button.setAttribute('aria-controls', 'site-navigation');
   button.setAttribute('aria-expanded', 'false');
-  button.setAttribute('aria-label', 'Open navigation menu');
+  button.setAttribute('aria-label', 'Loading navigation menu');
+  button.disabled = true;
   button.innerHTML = '<span class="nav-menu-icon"><span></span><span></span><span></span></span>';
 
   button.addEventListener('click', () => {
-    document.dispatchEvent(new CustomEvent('sitenav:open', { detail: { trigger: button } }));
-    button.setAttribute('aria-expanded', 'true');
-    button.setAttribute('aria-label', 'Close navigation menu');
+    document.dispatchEvent(new CustomEvent('sitenav:toggle', { detail: { trigger: button } }));
   });
 
-  document.addEventListener('sitenav:close', () => {
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Open navigation menu');
-  });
+  const syncState = ({ ready = false, open = false, error = false } = {}) => {
+    let label = 'Loading navigation menu';
+    if (error) label = 'Navigation unavailable';
+    else if (open) label = 'Close navigation menu';
+    else if (ready) label = 'Open navigation menu';
+
+    button.disabled = !ready;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', label);
+  };
+
+  document.addEventListener('sitenav:state', (event) => syncState(event.detail));
+
+  const state = document.body.dataset.sitenavState;
+  if (state) {
+    syncState({
+      ready: state === 'closed' || state === 'open',
+      open: state === 'open',
+      error: state === 'error',
+    });
+  } else {
+    document.dispatchEvent(new CustomEvent('sitenav:state-request'));
+  }
 
   section.prepend(button);
 }

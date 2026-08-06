@@ -53,7 +53,7 @@ describe('Responsive documentation navigation', () => {
 
   it('opens as an isolated mobile drawer and restores focus on Escape', () => {
     trigger.focus();
-    document.dispatchEvent(new CustomEvent('sitenav:open', { detail: { trigger } }));
+    document.dispatchEvent(new CustomEvent('sitenav:toggle', { detail: { trigger } }));
 
     expect(document.body.classList.contains('nav-open')).to.equal(true);
     expect(nav.getAttribute('aria-hidden')).to.equal('false');
@@ -72,7 +72,7 @@ describe('Responsive documentation navigation', () => {
   });
 
   it('contains reverse tab navigation inside the open drawer', () => {
-    document.dispatchEvent(new CustomEvent('sitenav:open', { detail: { trigger } }));
+    document.dispatchEvent(new CustomEvent('sitenav:toggle', { detail: { trigger } }));
     const close = nav.querySelector('.sitenav-close');
     const visible = [...nav.querySelectorAll('a[href], button:not([disabled])')]
       .filter((item) => !item.closest('[hidden]'));
