@@ -39,9 +39,16 @@ function decorateEntry(li) {
 
   const btn = document.createElement('button');
   btn.className = 'expand-tree';
-  btn.setAttribute('aria-label', 'Expand');
   btn.innerHTML = EXP_ICON;
-  const toggle = () => li.classList.toggle('is-open');
+  const syncExpanded = () => {
+    const open = li.classList.contains('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Collapse section' : 'Expand section');
+  };
+  const toggle = () => {
+    li.classList.toggle('is-open');
+    syncExpanded();
+  };
   btn.addEventListener('click', toggle);
   // A span label can't navigate, so let it toggle the section. A link label
   // (e.g. "API reference" -> /api-reference) keeps its default navigation; the
@@ -56,6 +63,7 @@ function decorateEntry(li) {
   if ([...childList.querySelectorAll('a')].some((a) => samePath(a.href))) {
     li.classList.add('is-open');
   }
+  syncExpanded();
 }
 
 /** Highlight the matching link and keep all ancestor sections open. */
@@ -67,6 +75,11 @@ function setActive(root) {
   let section = active.closest('li');
   while (section) {
     section.classList.add('is-open');
+    const toggle = section.querySelector(':scope > .expand-tree');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Collapse section');
+    }
     section = section.parentElement?.closest('li');
   }
 }
