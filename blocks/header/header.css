@@ -91,9 +91,9 @@ header .actions-section {
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 720px) {
   .header {
-    padding: 0 32px 0 72px;
+    padding: 0 24px 0 40px;
   }
 
   header .nav-menu-button {
@@ -107,6 +107,12 @@ header .actions-section {
     margin: 0;
     padding: 0;
     gap: var(--spacing-xl);
+  }
+}
+
+@media (width >= 1024px) {
+  .header {
+    padding-left: 56px;
   }
 }
 
@@ -160,7 +166,7 @@ button.DocSearch-Button {
   border-radius: 0.5rem;
 }
 
-@media (width >= 900px) {
+@media (width >= 720px) {
   body.DocSearch--active .DocSearch-Modal {
     border-radius: 0.5rem;
   }

@@ -10,6 +10,7 @@ const { codeBase } = getConfig();
 // Navigation is authored in DA alongside the documentation, never as a Git
 // content fixture. The block consumes the rendered shared fragment.
 const DOCS_NAV_PATH = `${codeBase}/fragments/nav/sitenav.plain.html`;
+const DESKTOP_NAV_QUERY = '(width >= 720px)';
 
 /** Normalize paths so extensionless content links match generated/static pages. */
 function normalizePath(pathname) {
@@ -76,6 +77,15 @@ async function fetchNav(path) {
   const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
   const list = doc.querySelector('ul');
   if (!list) throw Error(`${path} has no <ul>`);
+
+  // DA's plain HTML can preserve a paragraph around a list item's only link.
+  // Normalize that authoring shape so every level receives the same direct-link
+  // styling, expansion control, and active-state treatment.
+  list.querySelectorAll('li > p:only-child, li > p:first-child').forEach((paragraph) => {
+    if (paragraph.children.length === 1 && paragraph.firstElementChild?.tagName === 'A') {
+      paragraph.replaceWith(paragraph.firstElementChild);
+    }
+  });
   return list;
 }
 
@@ -108,7 +118,7 @@ function decorateMobileDrawer(el) {
   el.insertAdjacentElement('afterend', backdrop);
 
   el.addEventListener('click', (e) => {
-    if (e.target.closest('a') && window.matchMedia('(width < 900px)').matches) {
+    if (e.target.closest('a') && !window.matchMedia(DESKTOP_NAV_QUERY).matches) {
       closeMobileNav();
     }
   });

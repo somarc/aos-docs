@@ -149,7 +149,7 @@
   display: none;
 }
 
-@media (width < 900px) {
+@media (width < 720px) {
   body.nav-open {
     overflow: hidden;
   }
@@ -208,15 +208,21 @@
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 720px) {
   .sitenav {
     display: block;
-    width: 300px;
+    width: 248px;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     box-sizing: border-box;
     overflow-y: auto;
+  }
+}
+
+@media (width >= 1024px) {
+  .sitenav {
+    width: 280px;
   }
 }
